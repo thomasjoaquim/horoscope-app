@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Painel - Portal Astrológico</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dashboard-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .user-info h2 {
+            margin-bottom: 5px;
+        }
+        
+        .btn-logout {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .btn-logout:hover {
+            background: white;
+            color: #667eea;
+        }
+        
+        .dashboard-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        .tab-btn {
+            padding: 15px 25px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        
+        .mapas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .mapa-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .mapa-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+        
+        .mapa-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .mapa-card p {
+            color: #666;
+            margin: 5px 0;
+            font-size: 0.95em;
+        }
+        
+        .btn-delete {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+        
+        .btn-delete:hover {
+            background: #ff5252;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        
+        .empty-state h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        .btn-novo-mapa {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .btn-novo-mapa:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="dashboard-header">
+            <div class="user-info">
+                <h2 id="nomeUsuario">Olá, Usuário!</h2>
+                <p id="emailUsuario"></p>
+            </div>
+            <button id="btnLogout" class="btn-logout">Sair</button>
+        </div>
+
+        <div class="dashboard-tabs">
+            <button class="tab-btn active" data-tab="novo">🔮 Novo Mapa</button>
+            <button class="tab-btn" data-tab="historico">📚 Histórico</button>
+            <button class="tab-btn" data-tab="perfil">👤 Perfil</button>
+        </div>
+
+        <!-- TAB: Novo Mapa -->
+        <div id="tab-novo" class="tab-content active">
+            <h2>✨ Consultar Novo Mapa Astral</h2>
+            
+            <form id="formAstrologia">
+                <div class="form-section">
+                    <h3>📅 Data de Nascimento</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Dia:</label>
+                            <input type="number" id="dia" min="1" max="31" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Mês:</label>
+                            <input type="number" id="mes" min="1" max="12" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Ano:</label>
+                            <input type="number" id="ano" min="1900" max="2025" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>🕐 Hora de Nascimento</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Hora:</label>
+                            <input type="number" id="hora" min="0" max="23" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Minutos:</label>
+                            <input type="number" id="minutos" min="0" max="59" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>📍 Local de Nascimento</h3>
+                    <div class="form-group">
+                        <label>Cidade (opcional):</label>
+                        <input type="text" id="cidade" placeholder="Ex: São Paulo">
+                    </div>
+                    <div class="form-group">
+                        <label>Latitude:</label>
+                        <input type="number" id="latitude" step="0.000001" placeholder="Ex: -23.5505" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Longitude:</label>
+                        <input type="number" id="longitude" step="0.000001" placeholder="Ex: -46.6333" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Fuso Horário:</label>
+                        <input type="number" id="timezone" step="0.5" placeholder="Ex: -3" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox" id="salvar" checked>
+                        <span>Salvar este mapa no meu histórico</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-submit">🔮 Consultar Mapa Astral</button>
+            </form>
+
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Consultando as estrelas...</p>
+            </div>
+
+            <div id="resultado" class="resultado" style="display: none;">
+                <h2>🌙 Seu Mapa Astral</h2>
+                
+                <div class="card-principal">
+                    <h3 id="signosSolLuaAsc"></h3>
+                    <p id="mensagemHoroscopo"></p>
+                </div>
+
+                <div class="planetas-grid">
+                    <h3>🪐 Posição dos Planetas</h3>
+                    <div id="listaPlanetas"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: Histórico -->
+        <div id="tab-historico" class="tab-content">
+            <h2>📚 Meus Mapas Salvos</h2>
+            <div id="mapasLista" class="mapas-grid"></div>
+        </div>
+
+        <!-- TAB: Perfil -->
+        <div id="tab-perfil" class="tab-content">
+            <h2>👤 Meu Perfil</h2>
+            <div class="form-section">
+                <form id="formPerfil">
+                    <div class="form-group">
+                        <label>Nome:</label>
+                        <input type="text" id="perfilNome">
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" id="perfilEmail" disabled>
+                    </div>
+                    <button type="submit" class="btn-submit">Atualizar Perfil</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

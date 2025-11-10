@@ -3,96 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌟 Seu Mapa Astral</title>
+    <title>🌟 Portal Astrológico</title>
     <link rel="stylesheet" href="style.css">
     <script src="i18n.js"></script>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .landing-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-section {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: fadeIn 0.6s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-section h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .hero-section p {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            border: none;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            padding: 18px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            border: 3px solid #667eea;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .feature-card .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 40px 20px;
+            }
+
+            .hero-section h1 {
+                font-size: 1.8em;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1 data-i18n="home.title">✨ Descubra Seu Mapa Astral ✨</h1>
-            <p data-i18n="home.subtitle">Preencha seus dados de nascimento</p>
-            <div style="margin-top: 20px; display: flex; gap: 15px; justify-content: center;">
-                <a href="login.html" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold;" data-i18n="home.btnLogin">🔑 Login</a>
-                <a href="registro.html" style="background: white; color: #667eea; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; border: 2px solid #667eea;" data-i18n="home.btnRegister">✨ Criar Conta</a>
+    <div class="landing-container">
+        <div class="hero-section">
+            <div class="logo">🌙✨🔮</div>
+            <h1 data-i18n="landing.title">Portal Astrológico</h1>
+            <p data-i18n="landing.subtitle">Descubra os segredos do universo através do seu mapa astral personalizado</p>
+            
+            <div class="cta-buttons">
+                <a href="login.html" class="btn-primary" data-i18n="landing.btnLogin">
+                    🔑 Fazer Login
+                </a>
+                <a href="registro.html" class="btn-secondary" data-i18n="landing.btnSignup">
+                    ✨ Criar Conta Grátis
+                </a>
             </div>
-        </header>
-
-        <form id="formAstrologia">
-            <div class="form-section">
-                <h3 data-i18n="form.birthDate">📅 Data de Nascimento</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label data-i18n="form.day">Dia:</label>
-                        <input type="number" id="dia" min="1" max="31" required>
-                    </div>
-                    <div class="form-group">
-                        <label data-i18n="form.month">Mês:</label>
-                        <input type="number" id="mes" min="1" max="12" required>
-                    </div>
-                    <div class="form-group">
-                        <label data-i18n="form.year">Ano:</label>
-                        <input type="number" id="ano" min="1900" max="2025" required>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-section">
-                <h3 data-i18n="form.birthTime">🕐 Hora de Nascimento</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label data-i18n="form.hour">Hora:</label>
-                        <input type="number" id="hora" min="0" max="23" required>
-                    </div>
-                    <div class="form-group">
-                        <label data-i18n="form.minutes">Minutos:</label>
-                        <input type="number" id="minutos" min="0" max="59" required>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-section">
-                <h3 data-i18n="form.birthPlace">📍 Local de Nascimento</h3>
-                <div class="form-group">
-                    <label data-i18n="form.latitude">Latitude:</label>
-                    <input type="number" id="latitude" step="0.000001" data-i18n-placeholder="form.latitudePlaceholder" placeholder="Ex: -23.5505" required>
-                    <small data-i18n="form.latitudeHelp">Use números negativos para Sul</small>
-                </div>
-                <div class="form-group">
-                    <label data-i18n="form.longitude">Longitude:</label>
-                    <input type="number" id="longitude" step="0.000001" data-i18n-placeholder="form.longitudePlaceholder" placeholder="Ex: -46.6333" required>
-                    <small data-i18n="form.longitudeHelp">Use números negativos para Oeste</small>
-                </div>
-                <div class="form-group">
-                    <label data-i18n="form.timezone">Fuso Horário:</label>
-                    <input type="number" id="timezone" step="0.5" data-i18n-placeholder="form.timezonePlaceholder" placeholder="Ex: -3 (Brasília)" required>
-                    <small data-i18n="form.timezoneHelp">Ex: -3 para Brasília, -5 para NY</small>
-                </div>
-            </div>
-
-            <button type="submit" class="btn-submit" data-i18n="form.btnSubmit">🔮 Consultar Mapa Astral</button>
-        </form>
-
-        <div id="loading" class="loading" style="display: none;">
-            <div class="spinner"></div>
-            <p data-i18n="loading.text">Consultando as estrelas...</p>
         </div>
 
-        <div id="resultado" class="resultado" style="display: none;">
-            <h2 data-i18n="result.title">🌙 Seu Mapa Astral</h2>
-            
-            <div class="card-principal">
-                <h3 id="signosSolLuaAsc"></h3>
-                <p id="mensagemHoroscopo"></p>
+        <div class="features">
+            <div class="feature-card">
+                <div class="icon">🔮</div>
+                <h3 data-i18n="landing.feature1Title">Mapa Astral Completo</h3>
+                <p data-i18n="landing.feature1Text">Descubra seu Sol, Lua, Ascendente e a posição de todos os planetas</p>
             </div>
 
-            <div class="planetas-grid">
-                <h3 data-i18n="result.planetsTitle">🪐 Posição dos Planetas</h3>
-                <div id="listaPlanetas"></div>
+            <div class="feature-card">
+                <div class="icon">💾</div>
+                <h3 data-i18n="landing.feature2Title">Salve Seus Mapas</h3>
+                <p data-i18n="landing.feature2Text">Guarde seus mapas astrais e consulte quando quiser</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">🌍</div>
+                <h3 data-i18n="landing.feature3Title">Bilíngue</h3>
+                <p data-i18n="landing.feature3Text">Interface completa em Português e English</p>
             </div>
         </div>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>

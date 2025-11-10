@@ -1,5 +1,17 @@
 {
   "pt": {
+    "landing": {
+      "title": "Portal Astrológico",
+      "subtitle": "Descubra os segredos do universo através do seu mapa astral personalizado",
+      "btnLogin": "🔑 Fazer Login",
+      "btnSignup": "✨ Criar Conta Grátis",
+      "feature1Title": "Mapa Astral Completo",
+      "feature1Text": "Descubra seu Sol, Lua, Ascendente e a posição de todos os planetas",
+      "feature2Title": "Salve Seus Mapas",
+      "feature2Text": "Guarde seus mapas astrais e consulte quando quiser",
+      "feature3Title": "Bilíngue",
+      "feature3Text": "Interface completa em Português e English"
+    },
     "popup": {
       "title": "🌍 Escolha seu idioma",
       "subtitle": "Choose your language",
@@ -145,6 +157,18 @@
     }
   },
   "en": {
+    "landing": {
+      "title": "Astrology Portal",
+      "subtitle": "Discover the secrets of the universe through your personalized birth chart",
+      "btnLogin": "🔑 Login",
+      "btnSignup": "✨ Sign Up Free",
+      "feature1Title": "Complete Birth Chart",
+      "feature1Text": "Discover your Sun, Moon, Ascendant and the position of all planets",
+      "feature2Title": "Save Your Charts",
+      "feature2Text": "Keep your birth charts and consult them whenever you want",
+      "feature3Title": "Bilingual",
+      "feature3Text": "Complete interface in Português and English"
+    },
     "popup": {
       "title": "🌍 Choose your language",
       "subtitle": "Escolha seu idioma",

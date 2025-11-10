@@ -5,80 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🌟 Seu Mapa Astral</title>
     <link rel="stylesheet" href="style.css">
+    <script src="i18n.js"></script>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>✨ Descubra Seu Mapa Astral ✨</h1>
-            <p>Preencha seus dados de nascimento</p>
+            <h1 data-i18n="home.title">✨ Descubra Seu Mapa Astral ✨</h1>
+            <p data-i18n="home.subtitle">Preencha seus dados de nascimento</p>
             <div style="margin-top: 20px; display: flex; gap: 15px; justify-content: center;">
-                <a href="login.html" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold;">🔑 Login</a>
-                <a href="registro.html" style="background: white; color: #667eea; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; border: 2px solid #667eea;">✨ Criar Conta</a>
+                <a href="login.html" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold;" data-i18n="home.btnLogin">🔑 Login</a>
+                <a href="registro.html" style="background: white; color: #667eea; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; border: 2px solid #667eea;" data-i18n="home.btnRegister">✨ Criar Conta</a>
             </div>
         </header>
 
         <form id="formAstrologia">
             <div class="form-section">
-                <h3>📅 Data de Nascimento</h3>
+                <h3 data-i18n="form.birthDate">📅 Data de Nascimento</h3>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Dia:</label>
+                        <label data-i18n="form.day">Dia:</label>
                         <input type="number" id="dia" min="1" max="31" required>
                     </div>
                     <div class="form-group">
-                        <label>Mês:</label>
+                        <label data-i18n="form.month">Mês:</label>
                         <input type="number" id="mes" min="1" max="12" required>
                     </div>
                     <div class="form-group">
-                        <label>Ano:</label>
+                        <label data-i18n="form.year">Ano:</label>
                         <input type="number" id="ano" min="1900" max="2025" required>
                     </div>
                 </div>
             </div>
 
             <div class="form-section">
-                <h3>🕐 Hora de Nascimento</h3>
+                <h3 data-i18n="form.birthTime">🕐 Hora de Nascimento</h3>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Hora:</label>
+                        <label data-i18n="form.hour">Hora:</label>
                         <input type="number" id="hora" min="0" max="23" required>
                     </div>
                     <div class="form-group">
-                        <label>Minutos:</label>
+                        <label data-i18n="form.minutes">Minutos:</label>
                         <input type="number" id="minutos" min="0" max="59" required>
                     </div>
                 </div>
             </div>
 
             <div class="form-section">
-                <h3>📍 Local de Nascimento</h3>
+                <h3 data-i18n="form.birthPlace">📍 Local de Nascimento</h3>
                 <div class="form-group">
-                    <label>Latitude:</label>
-                    <input type="number" id="latitude" step="0.000001" placeholder="Ex: -23.5505" required>
-                    <small>Use números negativos para Sul</small>
+                    <label data-i18n="form.latitude">Latitude:</label>
+                    <input type="number" id="latitude" step="0.000001" data-i18n-placeholder="form.latitudePlaceholder" placeholder="Ex: -23.5505" required>
+                    <small data-i18n="form.latitudeHelp">Use números negativos para Sul</small>
                 </div>
                 <div class="form-group">
-                    <label>Longitude:</label>
-                    <input type="number" id="longitude" step="0.000001" placeholder="Ex: -46.6333" required>
-                    <small>Use números negativos para Oeste</small>
+                    <label data-i18n="form.longitude">Longitude:</label>
+                    <input type="number" id="longitude" step="0.000001" data-i18n-placeholder="form.longitudePlaceholder" placeholder="Ex: -46.6333" required>
+                    <small data-i18n="form.longitudeHelp">Use números negativos para Oeste</small>
                 </div>
                 <div class="form-group">
-                    <label>Fuso Horário:</label>
-                    <input type="number" id="timezone" step="0.5" placeholder="Ex: -3 (Brasília)" required>
-                    <small>Ex: -3 para Brasília, -5 para NY</small>
+                    <label data-i18n="form.timezone">Fuso Horário:</label>
+                    <input type="number" id="timezone" step="0.5" data-i18n-placeholder="form.timezonePlaceholder" placeholder="Ex: -3 (Brasília)" required>
+                    <small data-i18n="form.timezoneHelp">Ex: -3 para Brasília, -5 para NY</small>
                 </div>
             </div>
 
-            <button type="submit" class="btn-submit">🔮 Consultar Mapa Astral</button>
+            <button type="submit" class="btn-submit" data-i18n="form.btnSubmit">🔮 Consultar Mapa Astral</button>
         </form>
 
         <div id="loading" class="loading" style="display: none;">
             <div class="spinner"></div>
-            <p>Consultando as estrelas...</p>
+            <p data-i18n="loading.text">Consultando as estrelas...</p>
         </div>
 
         <div id="resultado" class="resultado" style="display: none;">
-            <h2>🌙 Seu Mapa Astral</h2>
+            <h2 data-i18n="result.title">🌙 Seu Mapa Astral</h2>
             
             <div class="card-principal">
                 <h3 id="signosSolLuaAsc"></h3>
@@ -86,7 +87,7 @@
             </div>
 
             <div class="planetas-grid">
-                <h3>🪐 Posição dos Planetas</h3>
+                <h3 data-i18n="result.planetsTitle">🪐 Posição dos Planetas</h3>
                 <div id="listaPlanetas"></div>
             </div>
         </div>

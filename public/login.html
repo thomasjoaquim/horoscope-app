@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Portal Astrológico</title>
     <link rel="stylesheet" href="style.css">
+    <script src="i18n.js"></script>
     <style>
         .auth-container {
             max-width: 450px;
@@ -108,29 +109,29 @@
 <body>
     <div class="auth-container">
         <div class="auth-header">
-            <h1>🌙 Portal Astrológico</h1>
-            <p>Faça login para acessar seu perfil</p>
+            <h1 data-i18n="auth.login.title">🌙 Portal Astrológico</h1>
+            <p data-i18n="auth.login.subtitle">Faça login para acessar seu perfil</p>
         </div>
 
         <div id="alert" class="alert"></div>
 
         <form id="loginForm" class="auth-form">
             <div class="form-group">
-                <label for="email">Email:</label>
+                <label for="email" data-i18n="auth.login.email">Email:</label>
                 <input type="email" id="email" required>
             </div>
 
             <div class="form-group">
-                <label for="senha">Senha:</label>
+                <label for="senha" data-i18n="auth.login.password">Senha:</label>
                 <input type="password" id="senha" required>
             </div>
 
-            <button type="submit" class="btn-auth">Entrar</button>
+            <button type="submit" class="btn-auth" data-i18n="auth.login.btnSubmit">Entrar</button>
         </form>
 
         <div class="auth-links">
-            <p>Não tem uma conta? <a href="registro.html">Cadastre-se aqui</a></p>
-            <p><a href="index.html">Voltar para o início</a></p>
+            <p><span data-i18n="auth.login.noAccount">Não tem uma conta?</span> <a href="registro.html" data-i18n="auth.login.register">Cadastre-se aqui</a></p>
+            <p><a href="index.html" data-i18n="auth.login.backHome">Voltar para o início</a></p>
         </div>
     </div>
 
@@ -157,7 +158,7 @@
                 const data = await response.json();
 
                 if (data.success) {
-                    mostrarAlerta('Login realizado com sucesso! Redirecionando...', 'success');
+                    mostrarAlerta(window.i18n.t('auth.login.successMessage'), 'success');
                     setTimeout(() => {
                         window.location.href = 'dashboard.html';
                     }, 1500);
@@ -165,7 +166,7 @@
                     mostrarAlerta(data.error, 'error');
                 }
             } catch (error) {
-                mostrarAlerta('Erro ao fazer login. Tente novamente.', 'error');
+                mostrarAlerta(window.i18n.t('errors.genericError'), 'error');
             }
         });
 

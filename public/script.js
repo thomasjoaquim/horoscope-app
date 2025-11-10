@@ -42,21 +42,27 @@ form.addEventListener('submit', async (e) => {
             // Mostrar os resultados
             mostrarResultado(data);
         } else {
-            alert('Erro: ' + data.error);
+            alert(data.error || window.i18n.t('errors.genericError'));
         }
 
     } catch (error) {
         loading.style.display = 'none';
-        alert('Erro ao buscar dados. Verifique sua conexão.');
+        alert(window.i18n.t('errors.fetchError'));
         console.error('Erro:', error);
     }
 });
 
 // Função para mostrar os resultados
 function mostrarResultado(data) {
+    const lang = window.i18n.currentLang || 'pt';
+    
     // Título com os signos principais
+    const sunText = window.i18n.t('result.sun');
+    const moonText = window.i18n.t('result.moon');
+    const ascText = window.i18n.t('result.ascendant');
+    
     document.getElementById('signosSolLuaAsc').textContent = 
-        `☀️ Sol em ${traduzirSigno(data.signoSolar)} | 🌙 Lua em ${traduzirSigno(data.signoLunar)} | ⬆️ Ascendente em ${traduzirSigno(data.ascendente)}`;
+        `${sunText} ${traduzirSigno(data.signoSolar)} | ${moonText} ${traduzirSigno(data.signoLunar)} | ${ascText} ${traduzirSigno(data.ascendente)}`;
     
     // Mensagem do horóscopo
     document.getElementById('mensagemHoroscopo').textContent = data.mensagem;
@@ -74,12 +80,15 @@ function mostrarResultado(data) {
             card.className = 'planeta-card';
             
             const emoji = getEmojiPlaneta(planeta.planet.en);
-            const retrograde = planeta.isRetro === 'True' || planeta.isRetro === 'true' ? ' ℞' : '';
+            const retrograde = planeta.isRetro === 'True' || planeta.isRetro === 'true' ? ' ' + window.i18n.t('result.retrograde') : '';
+            
+            const signText = window.i18n.t('result.sign');
+            const posText = window.i18n.t('result.position');
             
             card.innerHTML = `
                 <strong>${emoji} ${traduzirPlaneta(planeta.planet.en)}${retrograde}</strong>
-                <p>Signo: ${traduzirSigno(planeta.zodiac_sign.name.en)}</p>
-                <p>Posição: ${planeta.normDegree.toFixed(2)}°</p>
+                <p>${signText} ${traduzirSigno(planeta.zodiac_sign.name.en)}</p>
+                <p>${posText} ${planeta.normDegree.toFixed(2)}°</p>
             `;
             
             listaPlanetas.appendChild(card);
@@ -95,6 +104,10 @@ function mostrarResultado(data) {
 
 // Função para traduzir nomes de planetas
 function traduzirPlaneta(nome) {
+    if (window.i18n && window.i18n.translations) {
+        return window.i18n.t(`planets.${nome}`);
+    }
+    
     const traducoes = {
         'Sun': 'Sol',
         'Moon': 'Lua',
@@ -112,6 +125,10 @@ function traduzirPlaneta(nome) {
 
 // Função para traduzir signos
 function traduzirSigno(nome) {
+    if (window.i18n && window.i18n.translations) {
+        return window.i18n.t(`signs.${nome}`);
+    }
+    
     const traducoes = {
         'Aries': 'Áries',
         'Taurus': 'Touro',

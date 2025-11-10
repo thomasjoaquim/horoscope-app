@@ -1,0 +1,292 @@
+{
+  "pt": {
+    "popup": {
+      "title": "🌍 Escolha seu idioma",
+      "subtitle": "Choose your language",
+      "portuguese": "Português",
+      "english": "English"
+    },
+    "home": {
+      "title": "✨ Descubra Seu Mapa Astral ✨",
+      "subtitle": "Preencha seus dados de nascimento",
+      "btnLogin": "🔑 Login",
+      "btnRegister": "✨ Criar Conta"
+    },
+    "form": {
+      "birthDate": "📅 Data de Nascimento",
+      "day": "Dia:",
+      "month": "Mês:",
+      "year": "Ano:",
+      "birthTime": "🕐 Hora de Nascimento",
+      "hour": "Hora:",
+      "minutes": "Minutos:",
+      "birthPlace": "📍 Local de Nascimento",
+      "city": "Cidade (opcional):",
+      "cityPlaceholder": "Ex: São Paulo",
+      "latitude": "Latitude:",
+      "latitudePlaceholder": "Ex: -23.5505",
+      "latitudeHelp": "Use números negativos para Sul",
+      "longitude": "Longitude:",
+      "longitudePlaceholder": "Ex: -46.6333",
+      "longitudeHelp": "Use números negativos para Oeste",
+      "timezone": "Fuso Horário:",
+      "timezonePlaceholder": "Ex: -3 (Brasília)",
+      "timezoneHelp": "Ex: -3 para Brasília, -5 para NY",
+      "saveMap": "Salvar este mapa no meu histórico",
+      "btnSubmit": "🔮 Consultar Mapa Astral"
+    },
+    "loading": {
+      "text": "Consultando as estrelas..."
+    },
+    "result": {
+      "title": "🌙 Seu Mapa Astral",
+      "sun": "☀️ Sol em",
+      "moon": "🌙 Lua em",
+      "ascendant": "⬆️ Ascendente em",
+      "planetsTitle": "🪐 Posição dos Planetas",
+      "sign": "Signo:",
+      "position": "Posição:",
+      "retrograde": "℞"
+    },
+    "auth": {
+      "login": {
+        "title": "🌙 Portal Astrológico",
+        "subtitle": "Faça login para acessar seu perfil",
+        "email": "Email:",
+        "password": "Senha:",
+        "btnSubmit": "Entrar",
+        "noAccount": "Não tem uma conta?",
+        "register": "Cadastre-se aqui",
+        "backHome": "Voltar para o início",
+        "successMessage": "Login realizado com sucesso! Redirecionando..."
+      },
+      "register": {
+        "title": "✨ Criar Conta",
+        "subtitle": "Cadastre-se para salvar seus mapas astrais",
+        "name": "Nome completo:",
+        "email": "Email:",
+        "password": "Senha:",
+        "passwordHelp": "Mínimo 6 caracteres",
+        "confirmPassword": "Confirmar senha:",
+        "btnSubmit": "Criar Conta",
+        "hasAccount": "Já tem uma conta?",
+        "login": "Faça login aqui",
+        "backHome": "Voltar para o início",
+        "successMessage": "Conta criada com sucesso! Redirecionando..."
+      }
+    },
+    "dashboard": {
+      "header": {
+        "hello": "Olá,",
+        "btnLogout": "Sair"
+      },
+      "tabs": {
+        "newMap": "🔮 Novo Mapa",
+        "history": "📚 Histórico",
+        "profile": "👤 Perfil"
+      },
+      "newMap": {
+        "title": "✨ Consultar Novo Mapa Astral"
+      },
+      "history": {
+        "title": "📚 Meus Mapas Salvos",
+        "emptyTitle": "📭 Nenhum mapa salvo ainda",
+        "emptySubtitle": "Consulte seu primeiro mapa astral na aba \"Novo Mapa\"",
+        "date": "📅 Data:",
+        "time": "🕐 Hora:",
+        "place": "📍 Local:",
+        "btnDelete": "🗑️ Excluir",
+        "confirmDelete": "Tem certeza que deseja excluir este mapa?",
+        "deleteSuccess": "✅ Mapa excluído com sucesso!",
+        "saveSuccess": "✅ Mapa salvo no seu histórico!"
+      },
+      "profile": {
+        "title": "👤 Meu Perfil",
+        "name": "Nome:",
+        "email": "Email:",
+        "btnSubmit": "Atualizar Perfil",
+        "successMessage": "✅ Perfil atualizado com sucesso!"
+      }
+    },
+    "signs": {
+      "Aries": "Áries",
+      "Taurus": "Touro",
+      "Gemini": "Gêmeos",
+      "Cancer": "Câncer",
+      "Leo": "Leão",
+      "Virgo": "Virgem",
+      "Libra": "Libra",
+      "Scorpio": "Escorpião",
+      "Sagittarius": "Sagitário",
+      "Capricorn": "Capricórnio",
+      "Aquarius": "Aquário",
+      "Pisces": "Peixes"
+    },
+    "planets": {
+      "Sun": "Sol",
+      "Moon": "Lua",
+      "Mercury": "Mercúrio",
+      "Venus": "Vênus",
+      "Mars": "Marte",
+      "Jupiter": "Júpiter",
+      "Saturn": "Saturno",
+      "Uranus": "Urano",
+      "Neptune": "Netuno",
+      "Pluto": "Plutão"
+    },
+    "errors": {
+      "fillAllFields": "Por favor, preencha todos os campos!",
+      "fetchError": "Erro ao buscar dados. Verifique sua conexão.",
+      "passwordMismatch": "As senhas não coincidem!",
+      "passwordLength": "A senha deve ter no mínimo 6 caracteres!",
+      "emailExists": "Este email já está cadastrado!",
+      "invalidCredentials": "Email ou senha incorretos!",
+      "genericError": "Erro ao processar solicitação. Tente novamente."
+    }
+  },
+  "en": {
+    "popup": {
+      "title": "🌍 Choose your language",
+      "subtitle": "Escolha seu idioma",
+      "portuguese": "Português",
+      "english": "English"
+    },
+    "home": {
+      "title": "✨ Discover Your Birth Chart ✨",
+      "subtitle": "Fill in your birth information",
+      "btnLogin": "🔑 Login",
+      "btnRegister": "✨ Sign Up"
+    },
+    "form": {
+      "birthDate": "📅 Birth Date",
+      "day": "Day:",
+      "month": "Month:",
+      "year": "Year:",
+      "birthTime": "🕐 Birth Time",
+      "hour": "Hour:",
+      "minutes": "Minutes:",
+      "birthPlace": "📍 Birth Place",
+      "city": "City (optional):",
+      "cityPlaceholder": "Ex: New York",
+      "latitude": "Latitude:",
+      "latitudePlaceholder": "Ex: 40.7128",
+      "latitudeHelp": "Use negative numbers for South",
+      "longitude": "Longitude:",
+      "longitudePlaceholder": "Ex: -74.0060",
+      "longitudeHelp": "Use negative numbers for West",
+      "timezone": "Timezone:",
+      "timezonePlaceholder": "Ex: -5 (New York)",
+      "timezoneHelp": "Ex: -5 for NY, -3 for Brazil",
+      "saveMap": "Save this chart to my history",
+      "btnSubmit": "🔮 Get Birth Chart"
+    },
+    "loading": {
+      "text": "Consulting the stars..."
+    },
+    "result": {
+      "title": "🌙 Your Birth Chart",
+      "sun": "☀️ Sun in",
+      "moon": "🌙 Moon in",
+      "ascendant": "⬆️ Ascendant in",
+      "planetsTitle": "🪐 Planetary Positions",
+      "sign": "Sign:",
+      "position": "Position:",
+      "retrograde": "℞"
+    },
+    "auth": {
+      "login": {
+        "title": "🌙 Astrology Portal",
+        "subtitle": "Login to access your profile",
+        "email": "Email:",
+        "password": "Password:",
+        "btnSubmit": "Login",
+        "noAccount": "Don't have an account?",
+        "register": "Sign up here",
+        "backHome": "Back to home",
+        "successMessage": "Login successful! Redirecting..."
+      },
+      "register": {
+        "title": "✨ Sign Up",
+        "subtitle": "Register to save your birth charts",
+        "name": "Full name:",
+        "email": "Email:",
+        "password": "Password:",
+        "passwordHelp": "Minimum 6 characters",
+        "confirmPassword": "Confirm password:",
+        "btnSubmit": "Create Account",
+        "hasAccount": "Already have an account?",
+        "login": "Login here",
+        "backHome": "Back to home",
+        "successMessage": "Account created successfully! Redirecting..."
+      }
+    },
+    "dashboard": {
+      "header": {
+        "hello": "Hello,",
+        "btnLogout": "Logout"
+      },
+      "tabs": {
+        "newMap": "🔮 New Chart",
+        "history": "📚 History",
+        "profile": "👤 Profile"
+      },
+      "newMap": {
+        "title": "✨ Get New Birth Chart"
+      },
+      "history": {
+        "title": "📚 My Saved Charts",
+        "emptyTitle": "📭 No saved charts yet",
+        "emptySubtitle": "Get your first birth chart in the \"New Chart\" tab",
+        "date": "📅 Date:",
+        "time": "🕐 Time:",
+        "place": "📍 Place:",
+        "btnDelete": "🗑️ Delete",
+        "confirmDelete": "Are you sure you want to delete this chart?",
+        "deleteSuccess": "✅ Chart deleted successfully!",
+        "saveSuccess": "✅ Chart saved to your history!"
+      },
+      "profile": {
+        "title": "👤 My Profile",
+        "name": "Name:",
+        "email": "Email:",
+        "btnSubmit": "Update Profile",
+        "successMessage": "✅ Profile updated successfully!"
+      }
+    },
+    "signs": {
+      "Aries": "Aries",
+      "Taurus": "Taurus",
+      "Gemini": "Gemini",
+      "Cancer": "Cancer",
+      "Leo": "Leo",
+      "Virgo": "Virgo",
+      "Libra": "Libra",
+      "Scorpio": "Scorpio",
+      "Sagittarius": "Sagittarius",
+      "Capricorn": "Capricorn",
+      "Aquarius": "Aquarius",
+      "Pisces": "Pisces"
+    },
+    "planets": {
+      "Sun": "Sun",
+      "Moon": "Moon",
+      "Mercury": "Mercury",
+      "Venus": "Venus",
+      "Mars": "Mars",
+      "Jupiter": "Jupiter",
+      "Saturn": "Saturn",
+      "Uranus": "Uranus",
+      "Neptune": "Neptune",
+      "Pluto": "Pluto"
+    },
+    "errors": {
+      "fillAllFields": "Please fill in all fields!",
+      "fetchError": "Error fetching data. Check your connection.",
+      "passwordMismatch": "Passwords don't match!",
+      "passwordLength": "Password must be at least 6 characters!",
+      "emailExists": "This email is already registered!",
+      "invalidCredentials": "Invalid email or password!",
+      "genericError": "Error processing request. Please try again."
+    }
+  }
+}

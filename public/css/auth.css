@@ -1,0 +1,143 @@
+/* ============================================
+   🔐 AUTH PAGES - Login e Registro
+   ============================================ */
+
+/* Container de Autenticação */
+.auth-container {
+    max-width: 450px;
+    margin: 50px auto;
+    background: var(--color-bg-card);
+    padding: 40px;
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--shadow-2xl);
+    animation: fadeInUp var(--transition-slow);
+}
+
+/* Header */
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-header h1 {
+    color: var(--color-primary);
+    margin-bottom: 10px;
+    font-size: var(--font-size-3xl);
+}
+
+.auth-header p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+}
+
+/* Formulário */
+.auth-form .form-group {
+    margin-bottom: 20px;
+}
+
+.auth-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 12px;
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-base);
+    transition: all var(--transition-base);
+    font-family: var(--font-family-primary);
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.auth-form input:hover {
+    border-color: var(--color-primary);
+}
+
+/* Botão de Autenticação */
+.btn-auth {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    margin-top: 10px;
+}
+
+.btn-auth:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+.btn-auth:active {
+    transform: translateY(0);
+}
+
+/* Links */
+.auth-links {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--color-text-secondary);
+}
+
+.auth-links a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    transition: all var(--transition-fast);
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+    color: var(--color-primary-dark);
+}
+
+.auth-links p {
+    margin: 10px 0;
+}
+
+/* Alertas */
+.alert {
+    padding: 12px;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 20px;
+    display: none;
+    font-size: var(--font-size-base);
+}
+
+.alert-error {
+    background: #fee;
+    color: #c33;
+    border: 1px solid #fcc;
+}
+
+.alert-success {
+    background: #efe;
+    color: #3c3;
+    border: 1px solid #cfc;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .auth-container {
+        margin: 20px auto;
+        padding: 30px 20px;
+    }
+
+    .auth-header h1 {
+        font-size: var(--font-size-2xl);
+    }
+}

@@ -4,142 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Portal Astrológico</title>
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- ============================================
+         CSS - ORGANIZADO E SEPARADO
+         ============================================ -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
     <script src="i18n.js"></script>
-    <style>
-        .auth-container {
-            max-width: 450px;
-            margin: 50px auto;
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-        
-        .auth-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .auth-header h1 {
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-        
-        .auth-form .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .auth-form label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 600;
-        }
-        
-        .auth-form input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-        
-        .auth-form input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
-        .btn-auth {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s;
-            margin-top: 10px;
-        }
-        
-        .btn-auth:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
-        }
-        
-        .auth-links {
-            text-align: center;
-            margin-top: 20px;
-            color: #666;
-        }
-        
-        .auth-links a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        .auth-links a:hover {
-            text-decoration: underline;
-        }
-        
-        .alert {
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: none;
-        }
-        
-        .alert-error {
-            background: #fee;
-            color: #c33;
-            border: 1px solid #fcc;
-        }
-        
-        .alert-success {
-            background: #efe;
-            color: #3c3;
-            border: 1px solid #cfc;
-        }
-    </style>
 </head>
 <body>
+    <!-- Seletor de Idioma -->
+    <div class="language-selector">
+        <button onclick="window.i18n.changeLanguage('pt')" class="lang-btn" data-lang="pt">
+            🇧🇷 PT
+        </button>
+        <button onclick="window.i18n.changeLanguage('en')" class="lang-btn" data-lang="en">
+            🇺🇸 EN
+        </button>
+    </div>
+
+    <!-- Container de Autenticação -->
     <div class="auth-container">
+        <!-- Header -->
         <div class="auth-header">
             <h1 data-i18n="auth.login.title">🌙 Portal Astrológico</h1>
-            <p data-i18n="auth.login.subtitle">Faça login para acessar seu perfil</p>
+            <p data-i18n="auth.login.subtitle">Faça login para acessar seu perfil astral</p>
         </div>
 
+        <!-- Alert Box -->
         <div id="alert" class="alert"></div>
 
+        <!-- Formulário de Login -->
         <form id="loginForm" class="auth-form">
             <div class="form-group">
                 <label for="email" data-i18n="auth.login.email">Email:</label>
-                <input type="email" id="email" required>
+                <input 
+                    type="email" 
+                    id="email" 
+                    required
+                    data-i18n-placeholder="auth.login.emailPlaceholder"
+                    placeholder="seu@email.com"
+                    autocomplete="email"
+                >
             </div>
 
             <div class="form-group">
                 <label for="senha" data-i18n="auth.login.password">Senha:</label>
-                <input type="password" id="senha" required>
+                <input 
+                    type="password" 
+                    id="senha" 
+                    required
+                    data-i18n-placeholder="auth.login.passwordPlaceholder"
+                    placeholder="Digite sua senha"
+                    autocomplete="current-password"
+                >
             </div>
 
-            <button type="submit" class="btn-auth" data-i18n="auth.login.btnSubmit">Entrar</button>
+            <button type="submit" class="btn-auth" data-i18n="auth.login.btnSubmit">
+                Entrar
+            </button>
         </form>
 
+        <!-- Links -->
         <div class="auth-links">
-            <p><span data-i18n="auth.login.noAccount">Não tem uma conta?</span> <a href="registro.html" data-i18n="auth.login.register">Cadastre-se aqui</a></p>
-            <p><a href="index.html" data-i18n="auth.login.backHome">Voltar para o início</a></p>
+            <p>
+                <span data-i18n="auth.login.noAccount">Não tem uma conta?</span> 
+                <a href="registro.html" data-i18n="auth.login.register">Cadastre-se aqui</a>
+            </p>
+            <p>
+                <a href="index.html" data-i18n="auth.login.backHome">← Voltar para o início</a>
+            </p>
         </div>
     </div>
 
+    <!-- ============================================
+         JAVASCRIPT - Lógica de Login
+         ============================================ -->
     <script src="auth.js"></script>
     <script>
         const loginForm = document.getElementById('loginForm');
         const alertDiv = document.getElementById('alert');
 
+        // Handler do formulário de login
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
@@ -163,18 +113,35 @@
                         window.location.href = 'dashboard.html';
                     }, 1500);
                 } else {
-                    mostrarAlerta(data.error, 'error');
+                    mostrarAlerta(data.error || window.i18n.t('errors.loginFailed'), 'error');
                 }
             } catch (error) {
+                console.error('Erro no login:', error);
                 mostrarAlerta(window.i18n.t('errors.genericError'), 'error');
             }
         });
 
+        // Função para mostrar alertas
         function mostrarAlerta(mensagem, tipo) {
             alertDiv.textContent = mensagem;
             alertDiv.className = `alert alert-${tipo}`;
             alertDiv.style.display = 'block';
+
+            // Auto-ocultar alertas de sucesso
+            if (tipo === 'success') {
+                setTimeout(() => {
+                    alertDiv.style.display = 'none';
+                }, 3000);
+            }
         }
+
+        // Marcar idioma ativo
+        const currentLang = localStorage.getItem('language') || 'pt';
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            if (btn.dataset.lang === currentLang) {
+                btn.classList.add('active');
+            }
+        });
     </script>
 </body>
 </html>

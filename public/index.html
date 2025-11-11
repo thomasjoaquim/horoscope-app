@@ -3,169 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌟 Portal Astrológico</title>
-    <link rel="stylesheet" href="style.css">
+    <title>🌟 Portal Astrológico - Seu Mapa Astral Completo</title>
+    <meta name="description" content="Descubra os segredos do universo através do seu mapa astral personalizado">
+    
+    <!-- ============================================
+         CSS - ORGANIZADO E SEPARADO
+         ============================================ -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/landing.css">
+    
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
     <script src="i18n.js"></script>
-    <style>
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-
-        .landing-container {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .hero-section {
-            background: white;
-            border-radius: 20px;
-            padding: 60px 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            animation: fadeIn 0.6s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .logo {
-            font-size: 4em;
-            margin-bottom: 20px;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .hero-section h1 {
-            color: #667eea;
-            font-size: 2.5em;
-            margin-bottom: 15px;
-        }
-
-        .hero-section p {
-            color: #666;
-            font-size: 1.2em;
-            margin-bottom: 40px;
-            line-height: 1.6;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 18px 40px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
-            transition: all 0.3s;
-            border: none;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: #667eea;
-            padding: 18px 40px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
-            border: 3px solid #667eea;
-            transition: all 0.3s;
-        }
-
-        .btn-secondary:hover {
-            background: #667eea;
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: all 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
-        }
-
-        .feature-card .icon {
-            font-size: 3em;
-            margin-bottom: 15px;
-        }
-
-        .feature-card h3 {
-            color: #667eea;
-            margin-bottom: 10px;
-            font-size: 1.3em;
-        }
-
-        .feature-card p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        @media (max-width: 768px) {
-            .hero-section {
-                padding: 40px 20px;
-            }
-
-            .hero-section h1 {
-                font-size: 1.8em;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
-
-            .btn-primary, .btn-secondary {
-                width: 100%;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
 </head>
 <body>
+    <!-- Seletor de Idioma -->
+    <div class="language-selector">
+        <button onclick="window.i18n.changeLanguage('pt')" class="lang-btn" data-lang="pt">
+            🇧🇷 PT
+        </button>
+        <button onclick="window.i18n.changeLanguage('en')" class="lang-btn" data-lang="en">
+            🇺🇸 EN
+        </button>
+    </div>
+
+    <!-- Container Principal -->
     <div class="landing-container">
+        <!-- Hero Section -->
         <div class="hero-section">
             <div class="logo">🌙✨🔮</div>
+            
             <h1 data-i18n="landing.title">Portal Astrológico</h1>
-            <p data-i18n="landing.subtitle">Descubra os segredos do universo através do seu mapa astral personalizado</p>
+            
+            <p data-i18n="landing.subtitle">
+                Descubra os segredos do universo através do seu mapa astral personalizado
+            </p>
             
             <div class="cta-buttons">
                 <a href="login.html" class="btn-primary" data-i18n="landing.btnLogin">
@@ -177,25 +50,50 @@
             </div>
         </div>
 
+        <!-- Features Grid -->
         <div class="features">
             <div class="feature-card">
                 <div class="icon">🔮</div>
                 <h3 data-i18n="landing.feature1Title">Mapa Astral Completo</h3>
-                <p data-i18n="landing.feature1Text">Descubra seu Sol, Lua, Ascendente e a posição de todos os planetas</p>
+                <p data-i18n="landing.feature1Text">
+                    Descubra seu Sol, Lua, Ascendente e a posição de todos os planetas no momento do seu nascimento
+                </p>
             </div>
 
             <div class="feature-card">
                 <div class="icon">💾</div>
                 <h3 data-i18n="landing.feature2Title">Salve Seus Mapas</h3>
-                <p data-i18n="landing.feature2Text">Guarde seus mapas astrais e consulte quando quiser</p>
+                <p data-i18n="landing.feature2Text">
+                    Guarde seus mapas astrais e de pessoas queridas para consultar quando quiser
+                </p>
             </div>
 
             <div class="feature-card">
                 <div class="icon">🌍</div>
-                <h3 data-i18n="landing.feature3Title">Bilíngue</h3>
-                <p data-i18n="landing.feature3Text">Interface completa em Português e English</p>
+                <h3 data-i18n="landing.feature3Title">Interface Bilíngue</h3>
+                <p data-i18n="landing.feature3Text">
+                    Sistema completo em Português e English, escolha o idioma de sua preferência
+                </p>
             </div>
         </div>
+
+        <!-- Footer -->
+        <footer class="landing-footer">
+            <p data-i18n="landing.footer">
+                © 2024 Portal Astrológico. Explore o universo dentro de você.
+            </p>
+        </footer>
     </div>
+
+    <!-- Script para atualizar idioma selecionado -->
+    <script>
+        // Marcar idioma ativo
+        const currentLang = localStorage.getItem('language') || 'pt';
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            if (btn.dataset.lang === currentLang) {
+                btn.classList.add('active');
+            }
+        });
+    </script>
 </body>
 </html>

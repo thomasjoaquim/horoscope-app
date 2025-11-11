@@ -1,0 +1,209 @@
+/* ============================================
+   📊 DASHBOARD - Estilos Específicos
+   ============================================ */
+
+/* Header do Dashboard */
+.dashboard-header {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: white;
+    padding: 30px;
+    border-radius: var(--border-radius-lg);
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-md);
+}
+
+.user-info h2 {
+    margin-bottom: 5px;
+    font-size: var(--font-size-2xl);
+}
+
+.user-info p {
+    opacity: 0.9;
+    font-size: var(--font-size-base);
+}
+
+/* Botão de Logout */
+.btn-logout {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+    padding: 10px 20px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-weight: var(--font-weight-bold);
+    transition: all var(--transition-base);
+    font-size: var(--font-size-base);
+}
+
+.btn-logout:hover {
+    background: white;
+    color: var(--color-primary);
+}
+
+/* Sistema de Tabs */
+.dashboard-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--border-color);
+    overflow-x: auto;
+}
+
+.tab-btn {
+    padding: 15px 25px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-secondary);
+    transition: all var(--transition-base);
+    white-space: nowrap;
+}
+
+.tab-btn.active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+
+.tab-btn:hover {
+    color: var(--color-primary);
+}
+
+/* Conteúdo das Tabs */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn var(--transition-base);
+}
+
+.tab-content h2 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-2xl);
+}
+
+/* Grid de Mapas */
+.mapas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Card de Mapa */
+.mapa-card {
+    background: var(--color-bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    padding: 20px;
+    transition: all var(--transition-base);
+    cursor: pointer;
+}
+
+.mapa-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+    border-color: var(--color-primary);
+}
+
+.mapa-card h3 {
+    color: var(--color-primary);
+    margin-bottom: 10px;
+    font-size: var(--font-size-xl);
+}
+
+.mapa-card p {
+    color: var(--color-text-secondary);
+    margin: 5px 0;
+    font-size: var(--font-size-sm);
+}
+
+.mapa-card p strong {
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+/* Botão Delete */
+.btn-delete {
+    background: var(--color-error);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: var(--font-weight-semibold);
+    transition: all var(--transition-base);
+    font-size: var(--font-size-sm);
+}
+
+.btn-delete:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--color-text-light);
+}
+
+.empty-state h3 {
+    font-size: var(--font-size-2xl);
+    margin-bottom: 10px;
+    color: var(--color-text-secondary);
+}
+
+.empty-state p {
+    font-size: var(--font-size-base);
+}
+
+/* Botão Novo Mapa */
+.btn-novo-mapa {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all var(--transition-base);
+}
+
+.btn-novo-mapa:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .dashboard-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .dashboard-tabs {
+        flex-wrap: wrap;
+    }
+
+    .tab-btn {
+        flex: 1;
+        min-width: 100px;
+    }
+
+    .mapas-grid {
+        grid-template-columns: 1fr;
+    }
+}

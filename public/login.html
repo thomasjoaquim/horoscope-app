@@ -82,65 +82,138 @@
     </div>
 
     <!-- ============================================
-         JAVASCRIPT - Lógica de Login
+         JAVASCRIPT - Lógica de Login CORRIGIDA
          ============================================ -->
     <script src="auth.js"></script>
     <script>
-        const loginForm = document.getElementById('loginForm');
-        const alertDiv = document.getElementById('alert');
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('loginForm');
+            const alertDiv = document.getElementById('alert');
 
-        // Handler do formulário de login
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+            if (!loginForm) {
+                console.error('❌ Formulário de login não encontrado!');
+                return;
+            }
 
-            const dados = {
-                email: document.getElementById('email').value,
-                senha: document.getElementById('senha').value
-            };
+            console.log('✅ Script de login carregado com sucesso!');
 
-            try {
-                const response = await fetch('/api/auth/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(dados)
-                });
+            // Handler do formulário de login
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                console.log('📝 Formulário enviado - Iniciando login...');
 
-                const data = await response.json();
+                const email = document.getElementById('email').value.trim();
+                const senha = document.getElementById('senha').value;
 
-                if (data.success) {
-                    mostrarAlerta(window.i18n.t('auth.login.successMessage'), 'success');
-                    setTimeout(() => {
-                        window.location.href = 'dashboard.html';
-                    }, 1500);
-                } else {
-                    mostrarAlerta(data.error || window.i18n.t('errors.loginFailed'), 'error');
+                // Validar campos
+                if (!email || !senha) {
+                    console.warn('⚠️ Campos vazios!');
+                    mostrarAlerta('Por favor, preencha todos os campos!', 'error');
+                    return;
                 }
-            } catch (error) {
-                console.error('Erro no login:', error);
-                mostrarAlerta(window.i18n.t('errors.genericError'), 'error');
-            }
-        });
 
-        // Função para mostrar alertas
-        function mostrarAlerta(mensagem, tipo) {
-            alertDiv.textContent = mensagem;
-            alertDiv.className = `alert alert-${tipo}`;
-            alertDiv.style.display = 'block';
+                try {
+                    // Desabilitar botão durante requisição
+                    const btn = loginForm.querySelector('button[type="submit"]');
+                    const textoOriginal = btn.innerHTML;
+                    btn.disabled = true;
+                    btn.innerHTML = '⏳ Entrando...';
 
-            // Auto-ocultar alertas de sucesso
-            if (tipo === 'success') {
-                setTimeout(() => {
-                    alertDiv.style.display = 'none';
-                }, 3000);
-            }
-        }
+                    console.log('🔄 Enviando requisição POST para /api/auth/login');
+                    console.log('📧 Email:', email);
 
-        // Marcar idioma ativo
-        const currentLang = localStorage.getItem('language') || 'pt';
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            if (btn.dataset.lang === currentLang) {
-                btn.classList.add('active');
+                    const response = await fetch('/api/auth/login', {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ email, senha })
+                    });
+
+                    console.log('📡 Resposta recebida - Status:', response.status);
+
+                    const data = await response.json();
+                    console.log('📥 Dados da resposta:', data);
+
+                    // Restaurar botão
+                    btn.innerHTML = textoOriginal;
+                    btn.disabled = false;
+
+                    // ✅ CORRIGIDO: Verificar se token existe na resposta
+                    if (data.success && data.token) {
+                        console.log('✅ Login bem-sucedido!');
+                        console.log('🔐 Token recebido (primeiros 20 caracteres):', data.token.substring(0, 20) + '...');
+                        
+                        // Armazenar token no localStorage
+                        localStorage.setItem('token', data.token);
+                        console.log('💾 Token salvo em localStorage');
+
+                        // Mostrar mensagem de sucesso
+                        mostrarAlerta('✅ Login realizado com sucesso! Redirecionando...', 'success');
+                        
+                        console.log('⏳ Aguardando 1.5 segundos antes de redirecionar...');
+                        
+                        // Redirecionar após 1.5 segundos
+                        setTimeout(() => {
+                            console.log('🚀 Redirecionando para dashboard.html');
+                            window.location.href = 'dashboard.html';
+                        }, 1500);
+
+                    } else {
+                        // Se não tem token ou sucesso é false
+                        console.error('❌ Login falhou - Resposta sem token ou sucesso = false');
+                        console.error('Erro do servidor:', data.error);
+                        
+                        const mensagem = data.error || 'Erro ao fazer login!';
+                        mostrarAlerta(mensagem, 'error');
+                    }
+
+                } catch (error) {
+                    console.error('❌ Erro na requisição de login:', error);
+                    console.error('Detalhes do erro:', error.message);
+                    
+                    mostrarAlerta('Erro ao conectar com o servidor. Verifique sua conexão e tente novamente.', 'error');
+                    
+                    // Restaurar botão em caso de erro
+                    const btn = loginForm.querySelector('button[type="submit"]');
+                    btn.disabled = false;
+                    btn.innerHTML = 'Entrar';
+                }
+            });
+
+            // Função para mostrar alertas
+            function mostrarAlerta(mensagem, tipo) {
+                console.log(`📢 Mostrando alerta (${tipo}):`, mensagem);
+                
+                alertDiv.textContent = mensagem;
+                alertDiv.className = `alert alert-${tipo}`;
+                alertDiv.style.display = 'block';
+
+                // Auto-ocultar alertas de sucesso
+                if (tipo === 'success') {
+                    setTimeout(() => {
+                        alertDiv.style.display = 'none';
+                    }, 3000);
+                }
             }
+
+            // Permitir login com Enter
+            document.getElementById('senha').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    console.log('⌨️ Enter pressionado - Enviando formulário');
+                    loginForm.dispatchEvent(new Event('submit'));
+                }
+            });
+
+            // Marcar idioma ativo
+            const currentLang = localStorage.getItem('language') || 'pt';
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.dataset.lang === currentLang) {
+                    btn.classList.add('active');
+                }
+            });
+
+            console.log('✅ Inicialização concluída - Pronto para login!');
         });
     </script>
 </body>

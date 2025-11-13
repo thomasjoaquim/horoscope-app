@@ -184,7 +184,43 @@
                     <h3 data-i18n="result.planetsTitle">🪐 Posição dos Planetas</h3>
                     <div id="listaPlanetas"></div>
                 </div>
+                <div id="resultado" class="resultado" style="display: none;">
+                <h2>🌙 Seu Mapa Astral</h2>
+                
+                <div class="card-principal">
+                    <h3 id="signosSolLuaAsc"></h3>
+                    <p id="mensagemHoroscopo"></p>
+                </div>
+
+                <div class="planetas-grid">
+                    <h3>🪐 Posição dos Planetas</h3>
+                    <div id="listaPlanetas"></div>
+                </div>
+
+                <!-- ✨ ADICIONAR AQUI: -->
+                <div class="image-actions">
+                    <button id="btnGerarImagem" class="btn-download-image">
+                        🎨 Gerar Imagem do Mapa
+                    </button>
+                </div>
+
+                <div id="imagePreview" class="image-preview" style="display: none;">
+                    <h3>✨ Sua Imagem Personalizada</h3>
+                    <img id="mapaImage" src="" alt="Mapa Astral">
+                    <div class="image-actions">
+                        <button id="btnBaixarImagem" class="btn-download-image">
+                            📥 Baixar Imagem
+                        </button>
+                        <button id="btnCompartilhar" class="btn-share-image">
+                            🔗 Compartilhar
+                        </button>
+                    </div>
+                </div>
+                <!-- FIM DA ADIÇÃO -->
             </div>
+            </div>
+            
+            
         </div>
 
         <!-- ==========================================
@@ -224,6 +260,7 @@
     <!-- ============================================
          JAVASCRIPT - Lógica do Dashboard
          ============================================ -->
+    <script src="mapa-astral-image.js"></script>
     <script src="dashboard.js"></script>
     <script>
         // Marcar idioma ativo

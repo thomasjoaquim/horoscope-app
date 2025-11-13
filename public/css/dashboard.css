@@ -207,3 +207,70 @@
         grid-template-columns: 1fr;
     }
 }
+/* ============================================
+   BOTÕES DE IMAGEM
+   ============================================ */
+
+.image-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-download-image,
+.btn-share-image {
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-download-image {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-download-image:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
+}
+
+.btn-share-image {
+    background: white;
+    color: #667eea;
+    border: 2px solid #667eea;
+}
+
+.btn-share-image:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.image-preview {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.image-preview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    margin-top: 15px;
+}
+
+.image-preview h3 {
+    color: #667eea;
+    margin-bottom: 10px;
+    font-size: 24px;
+}

@@ -76,7 +76,7 @@ function verificarAutenticacao() {
 // ============================================
 
 function setupTabs() {
-    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabBtns = document.querySelectorAll('.modern-tab');
     const tabContents = document.querySelectorAll('.tab-content');
     
     tabBtns.forEach(btn => {
@@ -143,8 +143,8 @@ function setupFormAstrologia() {
             return;
         }
         
-        // Mostrar loading
-        mostrarLoading();
+        // Mostrar loading moderno
+        window.modernLoading.showWithAutoProgress('🔮 Consultando as estrelas...', 4000);
         
         try {
             // Chamar API
@@ -168,8 +168,11 @@ function setupFormAstrologia() {
                 salvarDadosMapa(resultado);
                 
                 // Ocultar loading e mostrar resultado
-                ocultarLoading();
+                window.modernLoading.hide();
                 mostrarResultado();
+                
+                // Toast de sucesso
+                window.toast.success('✨ Mapa astral calculado com sucesso!');
                 
                 // Scroll suave até o resultado
                 setTimeout(() => {
@@ -183,21 +186,22 @@ function setupFormAstrologia() {
                 
                 // Se salvou, atualizar histórico
                 if (dados.salvar) {
+                    window.toast.info('💾 Mapa salvo no seu histórico!');
                     setTimeout(() => {
                         carregarHistorico();
                     }, 1000);
                 }
                 
             } else {
-                ocultarLoading();
-                alert('Erro ao calcular mapa: ' + (resultado.error || 'Erro desconhecido'));
+                window.modernLoading.hide();
+                window.toast.error('Erro ao calcular mapa: ' + (resultado.error || 'Erro desconhecido'));
                 console.error('❌ Erro da API:', resultado.error);
             }
             
         } catch (error) {
-            ocultarLoading();
+            window.modernLoading.hide();
             console.error('❌ Erro ao consultar mapa:', error);
-            alert('Erro ao consultar mapa astral. Verifique sua conexão e tente novamente.');
+            window.toast.error('Erro ao consultar mapa astral. Verifique sua conexão e tente novamente.');
         }
     });
     
@@ -211,39 +215,39 @@ function setupFormAstrologia() {
 function validarDados(dados) {
     // Validar data
     if (dados.dia < 1 || dados.dia > 31) {
-        alert('Dia inválido! Use valores entre 1 e 31.');
+        window.toast.warning(window.i18n?.t('errors.invalidDay') || 'Dia inválido! Use valores entre 1 e 31.');
         return false;
     }
     
     if (dados.mes < 1 || dados.mes > 12) {
-        alert('Mês inválido! Use valores entre 1 e 12.');
+        window.toast.warning(window.i18n?.t('errors.invalidMonth') || 'Mês inválido! Use valores entre 1 e 12.');
         return false;
     }
     
     if (dados.ano < 1900 || dados.ano > 2025) {
-        alert('Ano inválido! Use valores entre 1900 e 2025.');
+        window.toast.warning(window.i18n?.t('errors.invalidYear') || 'Ano inválido! Use valores entre 1900 e 2025.');
         return false;
     }
     
     // Validar hora
     if (dados.hora < 0 || dados.hora > 23) {
-        alert('Hora inválida! Use valores entre 0 e 23.');
+        window.toast.warning(window.i18n?.t('errors.invalidHour') || 'Hora inválida! Use valores entre 0 e 23.');
         return false;
     }
     
     if (dados.minutos < 0 || dados.minutos > 59) {
-        alert('Minutos inválidos! Use valores entre 0 e 59.');
+        window.toast.warning(window.i18n?.t('errors.invalidMinutes') || 'Minutos inválidos! Use valores entre 0 e 59.');
         return false;
     }
     
     // Validar coordenadas
     if (isNaN(dados.latitude) || dados.latitude < -90 || dados.latitude > 90) {
-        alert('Latitude inválida! Use valores entre -90 e 90.');
+        window.toast.warning(window.i18n?.t('errors.invalidLatitude') || 'Latitude inválida! Use valores entre -90 e 90.');
         return false;
     }
     
     if (isNaN(dados.longitude) || dados.longitude < -180 || dados.longitude > 180) {
-        alert('Longitude inválida! Use valores entre -180 e 180.');
+        window.toast.warning(window.i18n?.t('errors.invalidLongitude') || 'Longitude inválida! Use valores entre -180 e 180.');
         return false;
     }
     
@@ -351,12 +355,12 @@ function setupImageButtons() {
 
 async function gerarImagemMapa() {
     if (!imageGenerator) {
-        alert('Gerador de imagem não está disponível. Recarregue a página.');
+        window.toast.error('Gerador de imagem não está disponível. Recarregue a página.');
         return;
     }
     
     if (!dadosMapaAtual) {
-        alert('Nenhum mapa astral foi consultado ainda!');
+        window.toast.warning('Nenhum mapa astral foi consultado ainda!');
         return;
     }
     
@@ -392,11 +396,12 @@ async function gerarImagemMapa() {
         btnGerarImagem.innerHTML = textoOriginal;
         btnGerarImagem.disabled = false;
         
+        window.toast.success('🎨 Imagem gerada com sucesso!');
         console.log('✅ Imagem gerada com sucesso');
         
     } catch (error) {
         console.error('❌ Erro ao gerar imagem:', error);
-        alert('Erro ao gerar imagem. Tente novamente.');
+        window.toast.error('Erro ao gerar imagem. Tente novamente.');
         
         const btnGerarImagem = document.getElementById('btnGerarImagem');
         if (btnGerarImagem) {
@@ -414,7 +419,7 @@ function baixarImagem() {
     const mapaImage = document.getElementById('mapaImage');
     
     if (!mapaImage || !mapaImage.src) {
-        alert('Nenhuma imagem foi gerada ainda!');
+        window.toast.warning('Nenhuma imagem foi gerada ainda!');
         return;
     }
     
@@ -427,6 +432,7 @@ function baixarImagem() {
     
     // Baixar
     imageGenerator.baixarImagem(imageDataUrl, nomeArquivo);
+    window.toast.success('📥 Download iniciado!');
     
     console.log('📥 Download iniciado:', nomeArquivo);
 }
@@ -439,7 +445,7 @@ async function compartilharImagem() {
     const mapaImage = document.getElementById('mapaImage');
     
     if (!mapaImage || !mapaImage.src) {
-        alert('Nenhuma imagem foi gerada ainda!');
+        window.toast.warning('Nenhuma imagem foi gerada ainda!');
         return;
     }
     
@@ -449,8 +455,9 @@ async function compartilharImagem() {
     const compartilhado = await imageGenerator.compartilharImagem(imageDataUrl, dadosMapaAtual);
     
     if (!compartilhado) {
-        alert('Compartilhamento não suportado neste navegador. Use o botão "Baixar Imagem" e compartilhe manualmente.');
+        window.toast.info('Compartilhamento não suportado neste navegador. Use o botão "Baixar Imagem" e compartilhe manualmente.');
     } else {
+        window.toast.success('🔗 Imagem compartilhada!');
         console.log('✅ Imagem compartilhada');
     }
 }
@@ -513,7 +520,8 @@ async function carregarDadosUsuario() {
             // Atualizar header
             const nomeUsuario = document.getElementById('nomeUsuario');
             if (nomeUsuario) {
-                nomeUsuario.textContent = `Olá, ${data.usuario.nome}!`;
+                const helloText = window.i18n?.t('dashboard.header.hello') || 'Olá,';
+                nomeUsuario.textContent = `${helloText} ${data.usuario.nome}!`;
             }
             
             const emailUsuario = document.getElementById('emailUsuario');
@@ -602,28 +610,125 @@ async function carregarHistorico() {
 
 function criarCardMapa(mapa) {
     const card = document.createElement('div');
-    card.className = 'mapa-card';
+    card.className = 'modern-card mapa-card';
     
     const data = new Date(mapa.criadoEm || mapa.data).toLocaleDateString('pt-BR');
     
     card.innerHTML = `
-        <h3>${mapa.nome || 'Mapa Astral'}</h3>
-        <p><strong>Data:</strong> ${mapa.dia}/${mapa.mes}/${mapa.ano}</p>
-        <p><strong>Hora:</strong> ${String(mapa.hora).padStart(2, '0')}:${String(mapa.minutos).padStart(2, '0')}</p>
-        ${mapa.cidade ? `<p><strong>Local:</strong> ${mapa.cidade}</p>` : ''}
-        <p><strong>Consultado em:</strong> ${data}</p>
-        <button class="btn-delete" onclick="deletarMapa('${mapa.id || mapa._id}')">
-            🗑️ Excluir
-        </button>
+        <div class="card-header">
+            <h3 class="card-title">
+                <span class="card-icon">🌙</span>
+                ${mapa.nome || 'Mapa Astral'}
+            </h3>
+            <span class="badge badge-primary">${mapa.dia}/${mapa.mes}/${mapa.ano}</span>
+        </div>
+        
+        <div class="card-content">
+            <div class="info-row">
+                <span class="info-icon">🕐</span>
+                <span class="info-text">${String(mapa.hora).padStart(2, '0')}:${String(mapa.minutos).padStart(2, '0')}</span>
+            </div>
+            
+            ${mapa.cidade ? `
+                <div class="info-row">
+                    <span class="info-icon">📍</span>
+                    <span class="info-text">${mapa.cidade}</span>
+                </div>
+            ` : ''}
+            
+            <div class="info-row">
+                <span class="info-icon">📅</span>
+                <span class="info-text">Consultado em ${data}</span>
+            </div>
+        </div>
+        
+        <div class="card-actions">
+            <button class="btn-modern btn-sm" onclick="event.stopPropagation(); visualizarMapa(${JSON.stringify(mapa).replace(/"/g, '&quot;')})">
+                👁️ Visualizar
+            </button>
+            <button class="btn-delete btn-sm" onclick="event.stopPropagation(); deletarMapa('${mapa.id || mapa._id}')">
+                🗑️ Excluir
+            </button>
+        </div>
     `;
     
-    // Clique no card para visualizar
-    card.style.cursor = 'pointer';
-    card.addEventListener('click', (e) => {
-        if (!e.target.classList.contains('btn-delete')) {
-            visualizarMapa(mapa);
-        }
-    });
+    // Adicionar estilos específicos do card
+    const cardStyles = document.createElement('style');
+    if (!document.getElementById('card-styles')) {
+        cardStyles.id = 'card-styles';
+        cardStyles.textContent = `
+            .card-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                margin-bottom: 16px;
+            }
+            
+            .card-title {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin: 0;
+                font-size: 18px;
+                font-weight: 600;
+                color: #333;
+            }
+            
+            .card-icon {
+                font-size: 20px;
+            }
+            
+            .card-content {
+                margin-bottom: 20px;
+            }
+            
+            .info-row {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 8px;
+                font-size: 14px;
+                color: #666;
+            }
+            
+            .info-icon {
+                font-size: 16px;
+                width: 20px;
+            }
+            
+            .info-text {
+                flex: 1;
+            }
+            
+            .card-actions {
+                display: flex;
+                gap: 8px;
+                justify-content: flex-end;
+                border-top: 1px solid #f0f0f0;
+                padding-top: 16px;
+            }
+            
+            .btn-sm {
+                padding: 8px 16px;
+                font-size: 12px;
+                border-radius: 8px;
+            }
+            
+            .btn-delete.btn-sm {
+                background: #ff6b6b;
+                color: white;
+                border: none;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            
+            .btn-delete.btn-sm:hover {
+                background: #ff5252;
+                transform: translateY(-1px);
+            }
+        `;
+        document.head.appendChild(cardStyles);
+    }
     
     return card;
 }

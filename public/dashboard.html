@@ -10,11 +10,14 @@
          ============================================ -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/modern-ui.css">
     
     <!-- ============================================
          JAVASCRIPT
          ============================================ -->
     <script src="i18n.js"></script>
+    <script src="toast.js"></script>
+    <script src="loading-component.js"></script>
 </head>
 <body>
     <!-- Seletor de Idioma -->
@@ -31,12 +34,12 @@
         <!-- ==========================================
              HEADER DO DASHBOARD
              ========================================== -->
-        <div class="dashboard-header">
+        <div class="glass-card dashboard-header">
             <div class="user-info">
                 <h2 id="nomeUsuario" data-i18n="dashboard.header.hello">Olá, Usuário!</h2>
                 <p id="emailUsuario"></p>
             </div>
-            <button id="btnLogout" class="btn-logout" data-i18n="dashboard.header.btnLogout">
+            <button id="btnLogout" class="btn-modern btn-logout" data-i18n="dashboard.header.btnLogout">
                 Sair
             </button>
         </div>
@@ -44,14 +47,14 @@
         <!-- ==========================================
              SISTEMA DE TABS
              ========================================== -->
-        <div class="dashboard-tabs">
-            <button class="tab-btn active" data-tab="novo" data-i18n="dashboard.tabs.newMap">
+        <div class="modern-tabs">
+            <button class="modern-tab active" data-tab="novo" data-i18n="dashboard.tabs.newMap">
                 🔮 Novo Mapa
             </button>
-            <button class="tab-btn" data-tab="historico" data-i18n="dashboard.tabs.history">
+            <button class="modern-tab" data-tab="historico" data-i18n="dashboard.tabs.history">
                 📚 Histórico
             </button>
-            <button class="tab-btn" data-tab="perfil" data-i18n="dashboard.tabs.profile">
+            <button class="modern-tab" data-tab="perfil" data-i18n="dashboard.tabs.profile">
                 👤 Perfil
             </button>
         </div>
@@ -160,15 +163,22 @@
                 </div>
 
                 <!-- Botão Submit -->
-                <button type="submit" class="btn-submit" data-i18n="form.btnSubmit">
+                <button type="submit" class="btn-modern btn-submit" data-i18n="form.btnSubmit">
                     🔮 Consultar Mapa Astral
                 </button>
             </form>
 
             <!-- Loading -->
             <div id="loading" class="loading" style="display: none;">
-                <div class="spinner"></div>
-                <p data-i18n="loading.text">Consultando as estrelas...</p>
+                <div class="modern-card">
+                    <div class="skeleton skeleton-title"></div>
+                    <div class="skeleton skeleton-text"></div>
+                    <div class="skeleton skeleton-text"></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 70%;"></div>
+                    </div>
+                    <p data-i18n="loading.text">Consultando as estrelas...</p>
+                </div>
             </div>
 
             <!-- Resultado -->
@@ -187,7 +197,7 @@
 
                 <!-- ✨ BOTÃO PARA GERAR IMAGEM ✨ -->
                 <div class="image-actions">
-                    <button id="btnGerarImagem" class="btn-download-image">
+                    <button id="btnGerarImagem" class="btn-modern">
                         🎨 Gerar Imagem do Mapa
                     </button>
                 </div>
@@ -197,10 +207,10 @@
                     <h3>✨ Sua Imagem Personalizada</h3>
                     <img id="mapaImage" src="" alt="Mapa Astral">
                     <div class="image-actions">
-                        <button id="btnBaixarImagem" class="btn-download-image">
+                        <button id="btnBaixarImagem" class="btn-modern">
                             📥 Baixar Imagem
                         </button>
-                        <button id="btnCompartilhar" class="btn-share-image">
+                        <button id="btnCompartilhar" class="btn-modern" style="background: var(--gradient-secondary);">
                             🔗 Compartilhar
                         </button>
                     </div>
@@ -248,12 +258,18 @@
     <script src="mapa-astral-image.js"></script>
     <script src="dashboard.js"></script>
     <script>
-        // Marcar idioma ativo
-        const currentLang = localStorage.getItem('language') || 'pt';
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            if (btn.dataset.lang === currentLang) {
-                btn.classList.add('active');
-            }
+        // Aguardar inicialização do i18n
+        document.addEventListener('DOMContentLoaded', () => {
+            // Marcar idioma ativo após inicialização
+            setTimeout(() => {
+                const currentLang = window.i18n?.currentLang || 'pt';
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.lang === currentLang) {
+                        btn.classList.add('active');
+                    }
+                });
+            }, 100);
         });
     </script>
 </body>

@@ -10,7 +10,8 @@
       "feature2Title": "Salve Seus Mapas",
       "feature2Text": "Guarde seus mapas astrais e consulte quando quiser",
       "feature3Title": "Bilíngue",
-      "feature3Text": "Interface completa em Português e English"
+      "feature3Text": "Interface completa em Português e English",
+      "footer": "© 2024 Portal Astrológico. Explore o universo dentro de você."
     },
     "popup": {
       "title": "🌍 Escolha seu idioma",
@@ -76,10 +77,14 @@
         "title": "✨ Criar Conta",
         "subtitle": "Cadastre-se para salvar seus mapas astrais",
         "name": "Nome completo:",
+        "namePlaceholder": "Seu nome completo",
         "email": "Email:",
+        "emailPlaceholder": "seu@email.com",
         "password": "Senha:",
+        "passwordPlaceholder": "Mínimo 6 caracteres",
         "passwordHelp": "Mínimo 6 caracteres",
         "confirmPassword": "Confirmar senha:",
+        "confirmPasswordPlaceholder": "Digite a senha novamente",
         "btnSubmit": "Criar Conta",
         "hasAccount": "Já tem uma conta?",
         "login": "Faça login aqui",
@@ -153,7 +158,29 @@
       "passwordLength": "A senha deve ter no mínimo 6 caracteres!",
       "emailExists": "Este email já está cadastrado!",
       "invalidCredentials": "Email ou senha incorretos!",
-      "genericError": "Erro ao processar solicitação. Tente novamente."
+      "genericError": "Erro ao processar solicitação. Tente novamente.",
+      "invalidDay": "Dia inválido! Use valores entre 1 e 31.",
+      "invalidMonth": "Mês inválido! Use valores entre 1 e 12.",
+      "invalidYear": "Ano inválido! Use valores entre 1900 e 2025.",
+      "invalidHour": "Hora inválida! Use valores entre 0 e 23.",
+      "invalidMinutes": "Minutos inválidos! Use valores entre 0 e 59.",
+      "invalidLatitude": "Latitude inválida! Use valores entre -90 e 90.",
+      "invalidLongitude": "Longitude inválida! Use valores entre -180 e 180.",
+      "registrationFailed": "Erro ao criar conta. Tente novamente."
+    },
+    "months": {
+      "1": "Janeiro",
+      "2": "Fevereiro",
+      "3": "Março",
+      "4": "Abril",
+      "5": "Maio",
+      "6": "Junho",
+      "7": "Julho",
+      "8": "Agosto",
+      "9": "Setembro",
+      "10": "Outubro",
+      "11": "Novembro",
+      "12": "Dezembro"
     }
   },
   "en": {
@@ -167,7 +194,8 @@
       "feature2Title": "Save Your Charts",
       "feature2Text": "Keep your birth charts and consult them whenever you want",
       "feature3Title": "Bilingual",
-      "feature3Text": "Complete interface in Português and English"
+      "feature3Text": "Complete interface in Português and English",
+      "footer": "© 2024 Astrology Portal. Explore the universe within you."
     },
     "popup": {
       "title": "🌍 Choose your language",
@@ -233,10 +261,14 @@
         "title": "✨ Sign Up",
         "subtitle": "Register to save your birth charts",
         "name": "Full name:",
+        "namePlaceholder": "Your full name",
         "email": "Email:",
+        "emailPlaceholder": "your@email.com",
         "password": "Password:",
+        "passwordPlaceholder": "Minimum 6 characters",
         "passwordHelp": "Minimum 6 characters",
         "confirmPassword": "Confirm password:",
+        "confirmPasswordPlaceholder": "Type password again",
         "btnSubmit": "Create Account",
         "hasAccount": "Already have an account?",
         "login": "Login here",
@@ -310,7 +342,29 @@
       "passwordLength": "Password must be at least 6 characters!",
       "emailExists": "This email is already registered!",
       "invalidCredentials": "Invalid email or password!",
-      "genericError": "Error processing request. Please try again."
+      "genericError": "Error processing request. Please try again.",
+      "invalidDay": "Invalid day! Use values between 1 and 31.",
+      "invalidMonth": "Invalid month! Use values between 1 and 12.",
+      "invalidYear": "Invalid year! Use values between 1900 and 2025.",
+      "invalidHour": "Invalid hour! Use values between 0 and 23.",
+      "invalidMinutes": "Invalid minutes! Use values between 0 and 59.",
+      "invalidLatitude": "Invalid latitude! Use values between -90 and 90.",
+      "invalidLongitude": "Invalid longitude! Use values between -180 and 180.",
+      "registrationFailed": "Error creating account. Please try again."
+    },
+    "months": {
+      "1": "January",
+      "2": "February",
+      "3": "March",
+      "4": "April",
+      "5": "May",
+      "6": "June",
+      "7": "July",
+      "8": "August",
+      "9": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December"
     }
   }
 }

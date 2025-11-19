@@ -1,0 +1,199 @@
+/* ============================================
+   🪐 ESTILOS PARA APRESENTAÇÃO DOS PLANETAS
+   ============================================ */
+
+.planeta-item-modern {
+    margin-bottom: 15px;
+}
+
+.planeta-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.planeta-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.planeta-card:hover::before {
+    left: 100%;
+}
+
+.planeta-header {
+    position: relative;
+    z-index: 2;
+}
+
+.planeta-emoji {
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    transition: transform 0.3s ease;
+}
+
+.planeta-card:hover .planeta-emoji {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.planeta-info h4 {
+    position: relative;
+}
+
+.planeta-info h4::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: currentColor;
+    transition: width 0.3s ease;
+}
+
+.planeta-card:hover .planeta-info h4::after {
+    width: 100%;
+}
+
+.planeta-grau {
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 8px 12px;
+    backdrop-filter: blur(10px);
+}
+
+.planeta-signo {
+    position: relative;
+    overflow: hidden;
+}
+
+.planeta-signo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    filter: brightness(1.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.planeta-card:hover .planeta-signo::before {
+    opacity: 1;
+}
+
+.planeta-signo span {
+    position: relative;
+    z-index: 2;
+}
+
+/* Animações específicas por planeta */
+.planeta-card[data-planeta="Sol"] {
+    animation: solar-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes solar-glow {
+    0% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+    100% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.5); }
+}
+
+.planeta-card[data-planeta="Lua"] {
+    animation: lunar-pulse 4s ease-in-out infinite;
+}
+
+@keyframes lunar-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .planeta-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .planeta-grau {
+        align-self: center;
+    }
+    
+    .planeta-emoji {
+        font-size: 2em !important;
+    }
+    
+    .planeta-info h4 {
+        font-size: 1.2em !important;
+    }
+}
+
+/* Efeitos de loading para quando os planetas aparecem */
+.planeta-item-modern {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: planeta-appear 0.6s ease-out forwards;
+}
+
+.planeta-item-modern:nth-child(1) { animation-delay: 0.1s; }
+.planeta-item-modern:nth-child(2) { animation-delay: 0.2s; }
+.planeta-item-modern:nth-child(3) { animation-delay: 0.3s; }
+.planeta-item-modern:nth-child(4) { animation-delay: 0.4s; }
+.planeta-item-modern:nth-child(5) { animation-delay: 0.5s; }
+.planeta-item-modern:nth-child(6) { animation-delay: 0.6s; }
+.planeta-item-modern:nth-child(7) { animation-delay: 0.7s; }
+.planeta-item-modern:nth-child(8) { animation-delay: 0.8s; }
+.planeta-item-modern:nth-child(9) { animation-delay: 0.9s; }
+.planeta-item-modern:nth-child(10) { animation-delay: 1.0s; }
+
+@keyframes planeta-appear {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Melhorias no grid de planetas */
+#listaPlanetas {
+    display: grid;
+    gap: 15px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+@media (min-width: 768px) {
+    #listaPlanetas {
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+}
+
+/* Estilo para o título dos planetas */
+.planetas-grid h3 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.planetas-grid h3::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 2px;
+}

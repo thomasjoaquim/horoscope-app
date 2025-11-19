@@ -196,6 +196,11 @@ class I18n {
 // Instância global
 const i18n = new I18n();
 
+// Adicionar função changeLanguage para compatibilidade
+i18n.changeLanguage = function(lang) {
+    this.setLanguage(lang);
+};
+
 // Inicialização automática
 document.addEventListener('DOMContentLoaded', async () => {
     await i18n.loadTranslations();
@@ -208,3 +213,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         i18n.translatePage();
     }
 });
+
+// Tornar i18n disponível globalmente
+window.i18n = i18n;

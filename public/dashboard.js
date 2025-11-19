@@ -53,6 +53,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     console.log('✅ Dashboard inicializado');
+    
+    // Escutar mudanças de idioma para re-traduzir conteúdo dinâmico
+    document.addEventListener('languageChanged', () => {
+        // Re-carregar dados do usuário para atualizar saudação
+        carregarDadosUsuario();
+        
+        // Se houver resultado visível, re-exibir com nova tradução
+        if (dadosMapaAtual && document.getElementById('resultado').style.display !== 'none') {
+            // Re-gerar a exibição dos planetas com nova tradução
+            setTimeout(() => {
+                const resultado = document.getElementById('resultado');
+                if (resultado && resultado.style.display !== 'none') {
+                    // Forçar re-renderização dos planetas
+                    const listaPlanetas = document.getElementById('listaPlanetas');
+                    if (listaPlanetas && listaPlanetas.children.length > 0) {
+                        // Simular re-exibição
+                        const event = new Event('submit');
+                        // Não re-submeter o form, apenas re-renderizar se já tem dados
+                    }
+                }
+            }, 100);
+        }
+    });
 });
 
 // ============================================
@@ -171,8 +194,19 @@ function setupFormAstrologia() {
                 window.modernLoading.hide();
                 mostrarResultado();
                 
-                // Toast de sucesso
-                window.toast.success('✨ Mapa astral calculado com sucesso!');
+                // Toast de sucesso ou aviso
+                if (resultado.isSimulado) {
+                    window.toast.warning('⚠️ API temporáriamente indisponível. Dados simulados gerados para demonstração.');
+                } else {
+                    window.toast.success('✨ Mapa astral calculado com sucesso!');
+                }
+                
+                // Mostrar aviso se houver
+                if (resultado.warning) {
+                    setTimeout(() => {
+                        window.toast.info(resultado.warning);
+                    }, 2000);
+                }
                 
                 // Scroll suave até o resultado
                 setTimeout(() => {
@@ -186,7 +220,10 @@ function setupFormAstrologia() {
                 
                 // Se salvou, atualizar histórico
                 if (dados.salvar) {
-                    window.toast.info('💾 Mapa salvo no seu histórico!');
+                    const mensagemSalvar = resultado.isSimulado ? 
+                        '💾 Mapa simulado salvo (API indisponível)' : 
+                        '💾 Mapa salvo no seu histórico!';
+                    window.toast.info(mensagemSalvar);
                     setTimeout(() => {
                         carregarHistorico();
                     }, 1000);
@@ -259,16 +296,44 @@ function validarDados(dados) {
 // ============================================
 
 function exibirResultado(resultado) {
-    // Sol, Lua, Ascendente
+    // Sol, Lua, Ascendente com estilo melhorado
     const signosSolLuaAsc = document.getElementById('signosSolLuaAsc');
     if (signosSolLuaAsc) {
-        signosSolLuaAsc.textContent = resultado.signosSolLuaAsc || 'Informação não disponível';
+        signosSolLuaAsc.innerHTML = `
+            <div style="
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 20px;
+                border-radius: 15px;
+                text-align: center;
+                font-size: 1.3em;
+                font-weight: bold;
+                text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+                margin-bottom: 20px;
+            ">
+                ${resultado.signosSolLuaAsc || 'Informação não disponível'}
+            </div>
+        `;
     }
     
-    // Mensagem do horóscopo
+    // Mensagem do horóscopo com formatação melhorada
     const mensagemHoroscopo = document.getElementById('mensagemHoroscopo');
     if (mensagemHoroscopo) {
-        mensagemHoroscopo.textContent = resultado.mensagem || resultado.horoscopo || 'Consulte os planetas abaixo para mais detalhes.';
+        const mensagem = resultado.mensagem || resultado.horoscopo || 'Consulte os planetas abaixo para mais detalhes.';
+        mensagemHoroscopo.innerHTML = `
+            <div style="
+                background: rgba(102, 126, 234, 0.1);
+                border-left: 4px solid #667eea;
+                padding: 20px;
+                border-radius: 10px;
+                font-size: 1.1em;
+                line-height: 1.6;
+                color: #333;
+                white-space: pre-line;
+            ">
+                ${mensagem}
+            </div>
+        `;
     }
     
     // Lista de planetas
@@ -276,22 +341,76 @@ function exibirResultado(resultado) {
     if (listaPlanetas && resultado.planetas) {
         listaPlanetas.innerHTML = '';
         
+        // Emojis e cores para cada planeta
+        const planetaConfig = {
+            'Sol': { emoji: '☀️', cor: '#FFD700' },
+            'Lua': { emoji: '🌙', cor: '#C0C0C0' },
+            'Mercúrio': { emoji: '☿️', cor: '#B8B8B8' },
+            'Vênus': { emoji: '♀️', cor: '#FFC0CB' },
+            'Marte': { emoji: '♂️', cor: '#FF4500' },
+            'Júpiter': { emoji: '♃', cor: '#FFA500' },
+            'Saturno': { emoji: '♄', cor: '#8B4513' },
+            'Urano': { emoji: '♅', cor: '#4FD0E3' },
+            'Netuno': { emoji: '♆', cor: '#4169E1' },
+            'Plutão': { emoji: '♇', cor: '#8B008B' }
+        };
+        
         resultado.planetas.forEach(planeta => {
-            const div = document.createElement('div');
-            div.className = 'planeta-item';
+            const config = planetaConfig[planeta.nome] || { emoji: '🪐', cor: '#667eea' };
+            const descricao = traduzirMensagemPlaneta(planeta.nome);
+            const grau = planeta.grau ? planeta.grau.toFixed(1) : '0.0';
+            const retrogrado = planeta.retrógrado ? ' ℞' : '';
             
-            const grau = planeta.grau ? ` (${planeta.grau.toFixed(2)}°)` : '';
+            const div = document.createElement('div');
+            div.className = 'planeta-item-modern';
             
             div.innerHTML = `
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: rgba(102, 126, 234, 0.1); border-radius: 8px; margin-bottom: 10px;">
-                    <div>
-                        <strong style="color: #667eea;">${planeta.nome}</strong>
-                        <span style="color: #666;"> em </span>
-                        <strong>${planeta.signo}</strong>
+                <div class="planeta-card" data-planeta="${planeta.nome}" style="
+                    background: linear-gradient(135deg, ${config.cor}15 0%, ${config.cor}05 100%);
+                    border: 2px solid ${config.cor}30;
+                    border-radius: 15px;
+                    padding: 20px;
+                    margin-bottom: 15px;
+                    transition: all 0.3s ease;
+                    cursor: pointer;
+                ">
+                    <div class="planeta-header" style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+                        <span class="planeta-emoji" style="font-size: 2.5em;">${config.emoji}</span>
+                        <div class="planeta-info" style="flex: 1;">
+                            <h4 style="margin: 0; color: ${config.cor}; font-size: 1.4em; font-weight: bold;">
+                                ${planeta.nome}${retrogrado}
+                            </h4>
+                            <p style="margin: 5px 0 0 0; color: #666; font-size: 0.9em;">${descricao}</p>
+                        </div>
+                        <div class="planeta-grau" style="text-align: right;">
+                            <div style="font-size: 1.2em; font-weight: bold; color: ${config.cor};">${grau}°</div>
+                            <div style="font-size: 0.8em; color: #999;">graus</div>
+                        </div>
                     </div>
-                    <small style="color: #999;">${grau}</small>
+                    <div class="planeta-signo" style="
+                        background: ${config.cor}20;
+                        padding: 10px 15px;
+                        border-radius: 10px;
+                        text-align: center;
+                        border: 1px solid ${config.cor}40;
+                    ">
+                        <span style="font-size: 1.1em; font-weight: bold; color: #333;">
+                            ${window.i18n?.currentLang === 'en' ? 'Positioned in' : 'Posicionado em'} ${planeta.signo}
+                        </span>
+                    </div>
                 </div>
             `;
+            
+            // Adicionar efeito hover
+            div.addEventListener('mouseenter', () => {
+                div.querySelector('.planeta-card').style.transform = 'translateY(-5px)';
+                div.querySelector('.planeta-card').style.boxShadow = `0 10px 30px ${config.cor}40`;
+            });
+            
+            div.addEventListener('mouseleave', () => {
+                div.querySelector('.planeta-card').style.transform = 'translateY(0)';
+                div.querySelector('.planeta-card').style.boxShadow = 'none';
+            });
             
             listaPlanetas.appendChild(div);
         });
@@ -521,7 +640,7 @@ async function carregarDadosUsuario() {
             const nomeUsuario = document.getElementById('nomeUsuario');
             if (nomeUsuario) {
                 const helloText = window.i18n?.t('dashboard.header.hello') || 'Olá,';
-                nomeUsuario.textContent = `${helloText} ${data.usuario.nome}!`;
+                nomeUsuario.innerHTML = `<span style="color: white !important; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">${helloText} ${data.usuario.nome}!</span>`;
             }
             
             const emailUsuario = document.getElementById('emailUsuario');
@@ -856,8 +975,28 @@ function logout() {
 // FUNÇÕES GLOBAIS (para onclick no HTML)
 // ============================================
 
+// Função para traduzir mensagens dos planetas
+function traduzirMensagemPlaneta(nomePlaneta) {
+    const traducoes = {
+        'Sol': { pt: 'Sua essência e identidade', en: 'Your essence and identity' },
+        'Lua': { pt: 'Suas emoções e instintos', en: 'Your emotions and instincts' },
+        'Mercúrio': { pt: 'Sua comunicação e mente', en: 'Your communication and mind' },
+        'Vênus': { pt: 'Seu amor e valores', en: 'Your love and values' },
+        'Marte': { pt: 'Sua energia e ação', en: 'Your energy and action' },
+        'Júpiter': { pt: 'Sua expansão e sabedoria', en: 'Your expansion and wisdom' },
+        'Saturno': { pt: 'Sua disciplina e estrutura', en: 'Your discipline and structure' },
+        'Urano': { pt: 'Sua originalidade e mudanças', en: 'Your originality and changes' },
+        'Netuno': { pt: 'Sua intuição e espiritualidade', en: 'Your intuition and spirituality' },
+        'Plutão': { pt: 'Sua transformação profunda', en: 'Your deep transformation' }
+    };
+    
+    const lang = window.i18n?.currentLang || 'pt';
+    return traducoes[nomePlaneta]?.[lang] || 'Influência planetária';
+}
+
 // Tornar funções acessíveis globalmente
 window.deletarMapa = deletarMapa;
 window.visualizarMapa = visualizarMapa;
+window.traduzirMensagemPlaneta = traduzirMensagemPlaneta;
 
 console.log('📜 dashboard.js carregado completamente');

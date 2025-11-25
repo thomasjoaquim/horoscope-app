@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Horoscope App</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Cosmic Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-star"></i> Cosmic Admin</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#dashboard" class="menu-item active" data-section="dashboard">
+                    <i class="fas fa-chart-line"></i> Dashboard
+                </a></li>
+                <li><a href="#users" class="menu-item" data-section="users">
+                    <i class="fas fa-users"></i> Celestial Users
+                </a></li>
+                <li><a href="#roles" class="menu-item" data-section="roles">
+                    <i class="fas fa-user-tag"></i> User Roles
+                </a></li>
+                <li><a href="#maps" class="menu-item" data-section="maps">
+                    <i class="fas fa-map-marked-alt"></i> Astral Maps
+                </a></li>
+                <li><a href="#analytics" class="menu-item" data-section="analytics">
+                    <i class="fas fa-chart-pie"></i> Cosmic Analytics
+                </a></li>
+                <li><a href="#events" class="menu-item" data-section="events">
+                    <i class="fas fa-calendar-alt"></i> Planetary Events
+                </a></li>
+                <li><a href="#settings" class="menu-item" data-section="settings">
+                    <i class="fas fa-cog"></i> Settings
+                </a></li>
+                <li><a href="#" id="logout-btn" class="menu-item logout">
+                    <i class="fas fa-sign-out-alt"></i> Exit Portal
+                </a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Cosmic Header -->
+            <header class="admin-header">
+                <h1 id="page-title">Cosmic Dashboard</h1>
+                <div class="user-info">
+                    <span id="admin-name">Cosmic Admin</span>
+                    <i class="fas fa-user-astronaut"></i>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-users">0</h3>
+                            <p>Cosmic Travelers</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="new-users-today">0</h3>
+                            <p>New Stargazers</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-maps">0</h3>
+                            <p>Astral Charts</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-meteor"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="maps-today">0</h3>
+                            <p>Today's Readings</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <h3>🌟 Cosmic Growth Timeline</h3>
+                        <canvas id="users-chart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>🔮 Astral Activity Patterns</h3>
+                        <canvas id="maps-chart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Celestial Users Section -->
+            <section id="users-section" class="content-section">
+                <div class="section-header">
+                    <h2>🌌 Celestial Users</h2>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="user-search" placeholder="Search cosmic travelers...">
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="users-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Data de Cadastro</th>
+                                <th>Mapas Criados</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-tbody">
+                            <!-- Usuários serão carregados aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Astral Maps Section -->
+            <section id="maps-section" class="content-section">
+                <div class="section-header">
+                    <h2>🗺️ Astral Maps</h2>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="maps-search" placeholder="Search astral charts...">
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="maps-table">
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Usuário</th>
+                                <th>Data de Nascimento</th>
+                                <th>Criado em</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="maps-tbody">
+                            <!-- Mapas serão carregados aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- User Roles Section -->
+            <section id="roles-section" class="content-section">
+                <div class="section-header">
+                    <h2>🏷️ User Roles Management</h2>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="roles-search" placeholder="Search users for role management...">
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="roles-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Email</th>
+                                <th>Current Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="roles-tbody">
+                            <!-- Users will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Cosmic Analytics Section -->
+            <section id="analytics-section" class="content-section">
+                <div class="section-header">
+                    <h2>🔭 Cosmic Analytics</h2>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="lunar-influence">78%</h3>
+                            <p>Lunar Influence Index</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="solar-activity">92%</h3>
+                            <p>Solar Activity Score</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="planetary-alignment">65%</h3>
+                            <p>Planetary Alignment</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="cosmic-energy">84%</h3>
+                            <p>Cosmic Energy Level</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Planetary Events Section -->
+            <section id="events-section" class="content-section">
+                <div class="section-header">
+                    <h2>🌌 Planetary Events</h2>
+                </div>
+                <div class="table-container">
+                    <table id="events-table">
+                        <thead>
+                            <tr>
+                                <th>Event Type</th>
+                                <th>Planets Involved</th>
+                                <th>Impact Level</th>
+                                <th>Date & Time</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="events-tbody">
+                            <tr>
+                                <td>🌑 Lunar Eclipse</td>
+                                <td>Moon, Earth, Sun</td>
+                                <td><span class="status-badge status-active">Major</span></td>
+                                <td>2024-03-15 22:30</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>↙️ Mercury Retrograde</td>
+                                <td>Mercury</td>
+                                <td><span class="status-badge status-inactive">Medium</span></td>
+                                <td>2024-03-20 14:15</td>
+                                <td><span class="status-badge status-inactive">Upcoming</span></td>
+                            </tr>
+                            <tr>
+                                <td>🪐 Mars Conjunction</td>
+                                <td>Mars, Jupiter</td>
+                                <td><span class="status-badge status-active">High</span></td>
+                                <td>2024-03-25 08:45</td>
+                                <td><span class="status-badge status-active">Monitoring</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings-section" class="content-section">
+                <div class="section-header">
+                    <h2>⚙️ Cosmic Settings</h2>
+                </div>
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <h3>🌌 System Configuration</h3>
+                        <div style="padding: 20px;">
+                            <div style="margin-bottom: 20px;">
+                                <label style="color: var(--starlight-gold); font-weight: 600; display: block; margin-bottom: 8px;">API Configuration</label>
+                                <input type="text" placeholder="Astrology API Key" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid rgba(138, 94, 255, 0.3); background: var(--card-gradient); color: var(--silver-metallic);">
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label style="color: var(--starlight-gold); font-weight: 600; display: block; margin-bottom: 8px;">Time Zone Settings</label>
+                                <select style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid rgba(138, 94, 255, 0.3); background: var(--card-gradient); color: var(--silver-metallic);">
+                                    <option>UTC-3 (Brasília)</option>
+                                    <option>UTC-5 (New York)</option>
+                                    <option>UTC+0 (London)</option>
+                                </select>
+                            </div>
+                            <button class="action-btn btn-view" style="margin-top: 15px;">Save Configuration</button>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>🔍 System Status</h3>
+                        <div style="padding: 20px;">
+                            <div style="margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: var(--silver-metallic);">Database Connection</span>
+                                <span class="status-badge status-active">Online</span>
+                            </div>
+                            <div style="margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: var(--silver-metallic);">Astrology API</span>
+                                <span class="status-badge status-active">Connected</span>
+                            </div>
+                            <div style="margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: var(--silver-metallic);">Server Load</span>
+                                <span style="color: var(--starlight-gold);">23%</span>
+                            </div>
+                            <div style="margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: var(--silver-metallic);">Memory Usage</span>
+                                <span style="color: var(--starlight-gold);">45%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Carregando...</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="cosmic-effects.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

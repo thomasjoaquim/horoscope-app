@@ -1,61 +1,64 @@
 /* ============================================
-   🎨 PORTAL ASTROLÓGICO - STYLE.CSS
-   ============================================
-   
-   ÍNDICE:
-   1. Variáveis CSS (Cores, Fontes, Espaçamentos)
-   2. Reset e Base
-   3. Componentes Reutilizáveis
-   4. Layout Principal
-   5. Formulários
-   6. Cartões e Cards
-   7. Botões
-   8. Animações
-   9. Responsividade
-   
+   🌌 COSMIC PORTAL ASTROLÓGICO - STYLE.CSS
    ============================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700;900&display=swap');
+
 /* ============================================
-   1. VARIÁVEIS CSS - CUSTOMIZE AQUI!
+   🌌 COSMIC VARIABLES
    ============================================ */
 
 :root {
+  /* 🌌 PALETA CÓSMICA */
+  --deep-space-blue: #0B1A2A;
+  --nebula-purple: #4A2E8E;
+  --cosmic-violet: #8A5EFF;
+  --starlight-gold: #EEDAA5;
+  --silver-metallic: #C8CCD6;
+  --cosmic-dark: #0A0F1C;
+  --space-gray: #1A1F2E;
+  --nebula-glow: rgba(138, 94, 255, 0.3);
+  --starlight-glow: rgba(238, 218, 165, 0.4);
+  
   /* 🎨 CORES PRINCIPAIS */
-  --color-primary: #0ea5e9;        /* Azul moderno */
-  --color-primary-dark: #0284c7;   /* Azul escuro */
-  --color-secondary: #10b981;      /* Verde esmeralda */
-  --color-accent: #f59e0b;         /* Dourado */
+  --color-primary: var(--cosmic-violet);
+  --color-primary-dark: var(--nebula-purple);
+  --color-secondary: var(--starlight-gold);
+  --color-accent: var(--starlight-gold);
   
-  /* 🎨 CORES DE FUNDO */
-  --color-bg-body: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-  --color-bg-card: #ffffff;
-  --color-bg-section: #f1f5f9;
-  --color-bg-input: #ffffff;
+  /* 🌌 CORES DE FUNDO */
+  --cosmic-gradient: linear-gradient(135deg, var(--deep-space-blue) 0%, var(--nebula-purple) 50%, var(--cosmic-dark) 100%);
+  --card-gradient: linear-gradient(145deg, rgba(26, 31, 46, 0.9) 0%, rgba(11, 26, 42, 0.95) 100%);
+  --color-bg-body: var(--cosmic-gradient);
+  --color-bg-card: var(--card-gradient);
+  --color-bg-section: var(--card-gradient);
+  --color-bg-input: var(--card-gradient);
   
-  /* 🎨 CORES DE TEXTO */
-  --color-text-primary: #1e293b;
-  --color-text-secondary: #475569;
-  --color-text-light: #64748b;
+  /* 🌟 CORES DE TEXTO */
+  --color-text-primary: var(--silver-metallic);
+  --color-text-secondary: rgba(200, 204, 214, 0.8);
+  --color-text-light: rgba(200, 204, 214, 0.6);
   --color-text-white: #ffffff;
   
-  /* 🎨 CORES DE STATUS */
+  /* 🌌 CORES DE STATUS */
   --color-success: #10b981;
   --color-error: #ef4444;
-  --color-warning: #f59e0b;
-  --color-info: #0ea5e9;
+  --color-warning: var(--starlight-gold);
+  --color-info: var(--cosmic-violet);
   
-  /* 📝 TIPOGRAFIA */
-  --font-family-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  --font-family-headings: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* 📝 TIPOGRAFIA CÓSMICA */
+  --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-cosmic: 'Orbitron', monospace;
+  --font-family-headings: 'Orbitron', monospace;
   
-  --font-size-xs: 0.75rem;    /* 12px */
-  --font-size-sm: 0.875rem;   /* 14px */
-  --font-size-base: 1rem;      /* 16px */
-  --font-size-lg: 1.125rem;    /* 18px */
-  --font-size-xl: 1.25rem;     /* 20px */
-  --font-size-2xl: 1.5rem;     /* 24px */
-  --font-size-3xl: 2rem;       /* 32px */
-  --font-size-4xl: 2.5rem;     /* 40px */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem;
+  --font-size-4xl: 2.5rem;
   
   --font-weight-normal: 400;
   --font-weight-medium: 500;
@@ -63,31 +66,32 @@
   --font-weight-bold: 700;
   
   /* 📏 ESPAÇAMENTOS */
-  --spacing-xs: 0.25rem;   /* 4px */
-  --spacing-sm: 0.5rem;    /* 8px */
-  --spacing-md: 1rem;      /* 16px */
-  --spacing-lg: 1.5rem;    /* 24px */
-  --spacing-xl: 2rem;      /* 32px */
-  --spacing-2xl: 3rem;     /* 48px */
-  --spacing-3xl: 4rem;     /* 64px */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
   
-  /* 🔲 BORDAS E RAIOS */
-  --border-radius-sm: 0.5rem;   /* 8px */
-  --border-radius-md: 0.75rem;  /* 12px */
-  --border-radius-lg: 1rem;     /* 16px */
-  --border-radius-xl: 1.25rem;  /* 20px */
+  /* 🔲 BORDAS CÓSMICAS */
+  --border-radius-sm: 0.5rem;
+  --border-radius-md: 0.75rem;
+  --border-radius-lg: 1rem;
+  --border-radius-xl: 1.5rem;
   --border-radius-full: 9999px;
   
   --border-width: 2px;
-  --border-color: #dddddd;
+  --border-color: rgba(138, 94, 255, 0.2);
   
-  /* 🎭 SOMBRAS */
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
-  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
-  --shadow-glow: 0 0 20px rgba(14, 165, 233, 0.4);
+  /* 🌟 SOMBRAS CÓSMICAS */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.6);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 20px rgba(138, 94, 255, 0.3);
+  --starlight-shadow: 0 0 15px rgba(238, 218, 165, 0.2);
   
   /* ⏱️ TRANSIÇÕES */
   --transition-fast: 0.15s ease;
@@ -100,7 +104,7 @@
 }
 
 /* ============================================
-   2. RESET E BASE
+   🌌 COSMIC RESET E BASE
    ============================================ */
 
 * {
@@ -120,41 +124,73 @@ body {
   font-weight: var(--font-weight-normal);
   line-height: 1.6;
   color: var(--color-text-primary);
-  background: var(--color-bg-body);
+  background: var(--cosmic-gradient);
+  background-attachment: fixed;
   min-height: 100vh;
   padding: var(--spacing-lg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Cosmic Background Animation */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(238, 218, 165, 0.3), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(138, 94, 255, 0.2), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(200, 204, 214, 0.4), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(238, 218, 165, 0.2), transparent),
+    radial-gradient(2px 2px at 160px 30px, rgba(138, 94, 255, 0.1), transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  animation: starfield 60s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes starfield {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100px); }
 }
 
 /* ============================================
-   3. COMPONENTES REUTILIZÁVEIS
+   🌌 COSMIC COMPONENTS
    ============================================ */
 
-/* Container Principal */
 .container {
   max-width: var(--container-max-width);
   margin: 0 auto;
-  background: var(--color-bg-card);
+  background: var(--card-gradient);
+  backdrop-filter: blur(20px);
   border-radius: var(--border-radius-xl);
   padding: var(--spacing-2xl);
-  box-shadow: var(--shadow-2xl);
-  animation: fadeInUp var(--transition-slow);
+  box-shadow: var(--shadow-glow), var(--shadow-2xl);
+  border: 1px solid var(--border-color);
+  animation: cosmicFadeInUp var(--transition-slow);
+  position: relative;
+  z-index: 1;
 }
 
-/* Cabeçalho */
 header {
   text-align: center;
   margin-bottom: var(--spacing-2xl);
 }
 
 header h1 {
-  font-family: var(--font-family-headings);
+  font-family: var(--font-family-cosmic);
   font-size: var(--font-size-4xl);
   font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
+  color: var(--starlight-gold);
   margin-bottom: var(--spacing-sm);
   line-height: 1.2;
+  text-shadow: 0 0 15px rgba(238, 218, 165, 0.5);
+  letter-spacing: 1px;
 }
 
 header p {
@@ -163,40 +199,40 @@ header p {
 }
 
 /* ============================================
-   4. LAYOUT PRINCIPAL
+   🌌 COSMIC FORMS
    ============================================ */
 
-/* Seções do Formulário */
 .form-section {
   margin-bottom: var(--spacing-xl);
   padding: var(--spacing-lg);
-  background: var(--color-bg-section);
+  background: var(--card-gradient);
+  backdrop-filter: blur(20px);
   border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-glow);
   transition: all var(--transition-base);
 }
 
 .form-section:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-glow), var(--starlight-shadow);
   transform: translateY(-2px);
+  border-color: var(--starlight-gold);
 }
 
 .form-section h3 {
+  font-family: var(--font-family-cosmic);
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-primary-dark);
+  color: var(--starlight-gold);
   margin-bottom: var(--spacing-md);
+  text-shadow: 0 0 10px rgba(238, 218, 165, 0.5);
 }
 
-/* Grid de Formulário */
 .form-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: var(--spacing-md);
 }
-
-/* ============================================
-   5. FORMULÁRIOS
-   ============================================ */
 
 .form-group {
   margin-bottom: var(--spacing-md);
@@ -207,7 +243,8 @@ header p {
   margin-bottom: var(--spacing-sm);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
+  color: var(--starlight-gold);
+  text-shadow: 0 0 5px rgba(238, 218, 165, 0.3);
 }
 
 .form-group input,
@@ -218,7 +255,8 @@ header p {
   font-size: var(--font-size-base);
   font-family: var(--font-family-primary);
   color: var(--color-text-primary);
-  background: var(--color-bg-input);
+  background: var(--card-gradient);
+  backdrop-filter: blur(10px);
   border: var(--border-width) solid var(--border-color);
   border-radius: var(--border-radius-sm);
   transition: all var(--transition-base);
@@ -228,14 +266,13 @@ header p {
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: var(--starlight-gold);
+  box-shadow: 0 0 15px rgba(238, 218, 165, 0.3);
+  transform: scale(1.02);
 }
 
-.form-group input:hover,
-.form-group select:hover,
-.form-group textarea:hover {
-  border-color: var(--color-primary);
+.form-group input::placeholder {
+  color: var(--color-text-light);
 }
 
 .form-group small {
@@ -245,91 +282,92 @@ header p {
   color: var(--color-text-light);
 }
 
-/* Checkbox e Radio */
-.form-group input[type="checkbox"],
-.form-group input[type="radio"] {
-  width: auto;
-  margin-right: var(--spacing-sm);
-}
-
 /* ============================================
-   6. CARTÕES E CARDS
+   🌌 COSMIC CARDS
    ============================================ */
 
 .card {
-  background: var(--color-bg-card);
+  background: var(--card-gradient);
+  backdrop-filter: blur(20px);
   border-radius: var(--border-radius-lg);
   padding: var(--spacing-lg);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-glow);
+  border: 1px solid var(--border-color);
   transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(138, 94, 255, 0.05) 0%, rgba(238, 218, 165, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 .card:hover {
-  box-shadow: var(--shadow-xl);
-  transform: translateY(-4px);
+  box-shadow: var(--shadow-glow), var(--starlight-shadow);
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--starlight-gold);
 }
 
 .card-principal {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(135deg, var(--cosmic-violet) 0%, var(--nebula-purple) 100%);
   color: var(--color-text-white);
   padding: var(--spacing-xl);
   border-radius: var(--border-radius-lg);
   margin-bottom: var(--spacing-xl);
-  box-shadow: var(--shadow-glow);
+  box-shadow: var(--shadow-glow), var(--starlight-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-principal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(238, 218, 165, 0.2), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
 }
 
 .card-principal h3 {
+  font-family: var(--font-family-cosmic);
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-bold);
   margin-bottom: var(--spacing-md);
   line-height: 1.3;
+  text-shadow: 0 0 15px rgba(238, 218, 165, 0.5);
+  position: relative;
+  z-index: 2;
 }
 
 .card-principal p {
   font-size: var(--font-size-lg);
   line-height: 1.6;
   white-space: pre-line;
-}
-
-/* Grid de Cards */
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: var(--spacing-lg);
-  margin-top: var(--spacing-lg);
-}
-
-/* Card de Planeta */
-.planeta-card {
-  background: var(--color-bg-section);
-  padding: var(--spacing-md);
-  border-radius: var(--border-radius-md);
-  border-left: 4px solid var(--color-primary);
-  transition: all var(--transition-base);
-}
-
-.planeta-card:hover {
-  background: var(--color-bg-card);
-  box-shadow: var(--shadow-md);
-  transform: translateX(4px);
-}
-
-.planeta-card strong {
-  display: block;
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-primary-dark);
-  margin-bottom: var(--spacing-xs);
-}
-
-.planeta-card p {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  margin-top: var(--spacing-xs);
+  position: relative;
+  z-index: 2;
 }
 
 /* ============================================
-   7. BOTÕES
+   🌌 COSMIC BUTTONS
    ============================================ */
 
 .btn {
@@ -340,83 +378,69 @@ header p {
   font-family: var(--font-family-primary);
   text-align: center;
   text-decoration: none;
-  border: none;
+  border: 1px solid var(--border-color);
   border-radius: var(--border-radius-md);
   cursor: pointer;
   transition: all var(--transition-base);
   white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(135deg, var(--cosmic-violet) 0%, var(--nebula-purple) 100%);
   color: var(--color-text-white);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
   box-shadow: var(--shadow-glow);
 }
 
-.btn-primary:active {
-  transform: translateY(0);
-}
-
-.btn-secondary {
-  background: var(--color-bg-card);
-  color: var(--color-primary);
-  border: var(--border-width) solid var(--color-primary);
-}
-
-.btn-secondary:hover {
-  background: var(--color-primary);
-  color: var(--color-text-white);
-  box-shadow: var(--shadow-md);
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-glow), 0 8px 25px rgba(138, 94, 255, 0.4);
+  border-color: var(--starlight-gold);
 }
 
 .btn-submit {
   width: 100%;
   padding: var(--spacing-lg);
   font-size: var(--font-size-xl);
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  font-family: var(--font-family-cosmic);
+  background: linear-gradient(135deg, var(--cosmic-violet) 0%, var(--nebula-purple) 100%);
   color: var(--color-text-white);
-  border: none;
+  border: 1px solid var(--border-color);
   border-radius: var(--border-radius-md);
   font-weight: var(--font-weight-bold);
   cursor: pointer;
   transition: all var(--transition-base);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-glow);
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(238, 218, 165, 0.5);
 }
 
 .btn-submit:hover {
   transform: translateY(-3px);
-  box-shadow: var(--shadow-glow);
-}
-
-.btn-submit:active {
-  transform: translateY(0);
-}
-
-/* Tamanhos de Botões */
-.btn-sm {
-  padding: var(--spacing-sm) var(--spacing-md);
-  font-size: var(--font-size-sm);
-}
-
-.btn-lg {
-  padding: var(--spacing-lg) var(--spacing-2xl);
-  font-size: var(--font-size-lg);
-}
-
-.btn-full {
-  width: 100%;
+  box-shadow: var(--shadow-glow), var(--starlight-shadow);
+  border-color: var(--starlight-gold);
 }
 
 /* ============================================
-   8. ESTADOS E FEEDBACK
+   🌌 COSMIC LOADING
    ============================================ */
 
-/* Loading/Spinner */
 .loading {
   text-align: center;
   padding: var(--spacing-2xl);
@@ -426,224 +450,69 @@ header p {
   width: 50px;
   height: 50px;
   margin: 0 auto var(--spacing-lg);
-  border: 4px solid var(--color-bg-section);
-  border-top: 4px solid var(--color-primary);
+  border: 4px solid rgba(138, 94, 255, 0.2);
+  border-top: 4px solid var(--cosmic-violet);
   border-radius: var(--border-radius-full);
-  animation: spin 1s linear infinite;
+  animation: cosmicSpin 1s linear infinite;
+}
+
+@keyframes cosmicSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .loading p {
+  font-family: var(--font-family-cosmic);
   font-size: var(--font-size-lg);
-  color: var(--color-text-secondary);
+  color: var(--starlight-gold);
   font-weight: var(--font-weight-medium);
+  text-shadow: 0 0 10px rgba(238, 218, 165, 0.5);
 }
 
-/* Resultado */
+/* ============================================
+   🌌 COSMIC ANIMATIONS
+   ============================================ */
+
+@keyframes cosmicFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes cosmicPulse {
+  0%, 100% {
+    box-shadow: var(--shadow-glow);
+  }
+  50% {
+    box-shadow: var(--shadow-glow), var(--starlight-shadow);
+  }
+}
+
 .resultado {
   margin-top: var(--spacing-xl);
-  animation: fadeInUp var(--transition-slow);
+  animation: cosmicFadeInUp var(--transition-slow);
 }
 
 .resultado h2 {
+  font-family: var(--font-family-cosmic);
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
+  color: var(--starlight-gold);
   text-align: center;
   margin-bottom: var(--spacing-xl);
-}
-
-/* Grid de Planetas */
-.planetas-grid h3 {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-primary-dark);
-  margin-bottom: var(--spacing-lg);
-}
-
-#listaPlanetas {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: var(--spacing-md);
+  text-shadow: 0 0 15px rgba(238, 218, 165, 0.5);
 }
 
 /* ============================================
-   9. ANIMAÇÕES
+   🌌 RESPONSIVE COSMIC
    ============================================ */
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-/* Classes de Animação */
-.fade-in {
-  animation: fadeIn var(--transition-base);
-}
-
-.fade-in-up {
-  animation: fadeInUp var(--transition-slow);
-}
-
-.slide-in-left {
-  animation: slideInLeft var(--transition-slow);
-}
-
-.float {
-  animation: float 3s ease-in-out infinite;
-}
-
-/* ============================================
-   10. UTILITÁRIOS
-   ============================================ */
-
-/* Espaçamentos */
-.mt-sm { margin-top: var(--spacing-sm); }
-.mt-md { margin-top: var(--spacing-md); }
-.mt-lg { margin-top: var(--spacing-lg); }
-.mt-xl { margin-top: var(--spacing-xl); }
-
-.mb-sm { margin-bottom: var(--spacing-sm); }
-.mb-md { margin-bottom: var(--spacing-md); }
-.mb-lg { margin-bottom: var(--spacing-lg); }
-.mb-xl { margin-bottom: var(--spacing-xl); }
-
-.p-sm { padding: var(--spacing-sm); }
-.p-md { padding: var(--spacing-md); }
-.p-lg { padding: var(--spacing-lg); }
-.p-xl { padding: var(--spacing-xl); }
-
-/* Textos */
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.text-right { text-align: right; }
-
-.text-primary { color: var(--color-primary); }
-.text-secondary { color: var(--color-text-secondary); }
-.text-light { color: var(--color-text-light); }
-.text-white { color: var(--color-text-white); }
-
-.font-bold { font-weight: var(--font-weight-bold); }
-.font-semibold { font-weight: var(--font-weight-semibold); }
-.font-medium { font-weight: var(--font-weight-medium); }
-
-/* Display */
-.hidden { display: none; }
-.block { display: block; }
-.inline-block { display: inline-block; }
-.flex { display: flex; }
-.grid { display: grid; }
-
-/* Flex */
-.flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.flex-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.flex-column {
-  display: flex;
-  flex-direction: column;
-}
-
-.gap-sm { gap: var(--spacing-sm); }
-.gap-md { gap: var(--spacing-md); }
-.gap-lg { gap: var(--spacing-lg); }
-
-/* ============================================
-   11. RESPONSIVIDADE
-   ============================================ */
-
-/* Tablets e menores */
 @media (max-width: 768px) {
-  :root {
-    --font-size-4xl: 2rem;
-    --font-size-3xl: 1.75rem;
-    --font-size-2xl: 1.5rem;
-    --spacing-2xl: 2rem;
-    --spacing-3xl: 3rem;
-  }
-  
   body {
     padding: var(--spacing-md);
   }
@@ -659,30 +528,9 @@ header p {
   .form-row {
     grid-template-columns: 1fr;
   }
-  
-  .cards-grid,
-  #listaPlanetas {
-    grid-template-columns: 1fr;
-  }
-  
-  .btn-group {
-    flex-direction: column;
-  }
-  
-  .btn-group .btn {
-    width: 100%;
-  }
 }
 
-/* Mobile pequeno */
 @media (max-width: 480px) {
-  :root {
-    --font-size-4xl: 1.75rem;
-    --font-size-3xl: 1.5rem;
-    --spacing-lg: 1rem;
-    --spacing-xl: 1.5rem;
-  }
-  
   body {
     padding: var(--spacing-sm);
   }
@@ -692,38 +540,7 @@ header p {
     border-radius: var(--border-radius-md);
   }
   
-  .card-principal {
-    padding: var(--spacing-lg);
+  header h1 {
+    font-size: var(--font-size-2xl);
   }
 }
-
-/* Desktop grande */
-@media (min-width: 1200px) {
-  :root {
-    --container-max-width: 1000px;
-  }
-}
-
-/* ============================================
-   12. MODO ESCURO (OPCIONAL)
-   ============================================ */
-
-@media (prefers-color-scheme: dark) {
-  /* Descomente para ativar modo escuro automático
-  
-  :root {
-    --color-bg-card: #1a1a1a;
-    --color-bg-section: #2a2a2a;
-    --color-bg-input: #333333;
-    --color-text-primary: #ffffff;
-    --color-text-secondary: #cccccc;
-    --color-text-light: #999999;
-    --border-color: #444444;
-  }
-  
-  */
-}
-
-/* ============================================
-   FIM DO ARQUIVO CSS
-   ============================================ */

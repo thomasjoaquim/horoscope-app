@@ -370,7 +370,8 @@ app.get('/api/auth/me', auth, async (req, res) => {
       usuario: {
         id: req.user._id,
         nome: req.user.nome,
-        email: req.user.email
+        email: req.user.email,
+        isAdmin: req.user.isAdmin || false
       }
     });
   } catch (error) {
@@ -405,6 +406,155 @@ app.put('/api/auth/atualizar', auth, async (req, res) => {
   } catch (error) {
     console.error('Erro ao atualizar:', error);
     res.status(500).json({ success: false, error: 'Erro ao atualizar usuário.' });
+  }
+});
+
+// ==================== MIDDLEWARE DE ADMIN ====================
+
+// Middleware para verificar se é admin
+const adminAuth = async (req, res, next) => {
+  try {
+    // Primeiro verificar se está autenticado
+    const token = req.cookies.token;
+    if (!token) {
+      return res.status(401).json({ success: false, error: 'Token não fornecido' });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id);
+    
+    if (!user) {
+      return res.status(401).json({ success: false, error: 'Usuário não encontrado' });
+    }
+
+    // Verificar se é admin
+    if (!user.isAdmin) {
+      return res.status(403).json({ success: false, error: 'Acesso negado. Apenas administradores.' });
+    }
+    
+    req.user = user;
+    next();
+  } catch (error) {
+    res.status(401).json({ success: false, error: 'Token inválido' });
+  }
+};
+
+// ==================== ROTAS DE ADMIN ====================
+
+// Obter todos os usuários
+app.get('/api/admin/users', adminAuth, async (req, res) => {
+  try {
+    const users = await User.find({}, '-senha').sort({ criadoEm: -1 });
+    
+    // Contar mapas para cada usuário
+    const usersWithMapCount = await Promise.all(
+      users.map(async (user) => {
+        const mapasCount = await MapaAstral.countDocuments({ userId: user._id });
+        return {
+          ...user.toObject(),
+          mapasCount
+        };
+      })
+    );
+    
+    res.json({ success: true, users: usersWithMapCount });
+  } catch (error) {
+    console.error('Erro ao buscar usuários:', error);
+    res.status(500).json({ success: false, error: 'Erro ao buscar usuários' });
+  }
+});
+
+// Obter todos os mapas astrais
+app.get('/api/admin/maps', adminAuth, async (req, res) => {
+  try {
+    const maps = await MapaAstral.find({})
+      .populate('userId', 'nome email')
+      .sort({ criadoEm: -1 });
+    
+    const mapsFormatted = maps.map(map => ({
+      _id: map._id,
+      titulo: map.titulo,
+      dataNascimento: map.dataNascimento,
+      horaNascimento: map.horaNascimento,
+      local: map.local,
+      criadoEm: map.criadoEm,
+      usuario: map.userId ? {
+        nome: map.userId.nome,
+        email: map.userId.email
+      } : null
+    }));
+    
+    res.json({ success: true, maps: mapsFormatted });
+  } catch (error) {
+    console.error('Erro ao buscar mapas:', error);
+    res.status(500).json({ success: false, error: 'Erro ao buscar mapas' });
+  }
+});
+
+// Deletar usuário
+app.delete('/api/admin/users/:id', adminAuth, async (req, res) => {
+  try {
+    const userId = req.params.id;
+    
+    // Deletar todos os mapas do usuário primeiro
+    await MapaAstral.deleteMany({ userId });
+    
+    // Deletar o usuário
+    const user = await User.findByIdAndDelete(userId);
+    
+    if (!user) {
+      return res.status(404).json({ success: false, error: 'Usuário não encontrado' });
+    }
+    
+    res.json({ success: true, message: 'Usuário e seus mapas foram excluídos com sucesso' });
+  } catch (error) {
+    console.error('Erro ao deletar usuário:', error);
+    res.status(500).json({ success: false, error: 'Erro ao deletar usuário' });
+  }
+});
+
+// Deletar mapa astral
+app.delete('/api/admin/maps/:id', adminAuth, async (req, res) => {
+  try {
+    const mapId = req.params.id;
+    
+    const map = await MapaAstral.findByIdAndDelete(mapId);
+    
+    if (!map) {
+      return res.status(404).json({ success: false, error: 'Mapa não encontrado' });
+    }
+    
+    res.json({ success: true, message: 'Mapa excluído com sucesso' });
+  } catch (error) {
+    console.error('Erro ao deletar mapa:', error);
+    res.status(500).json({ success: false, error: 'Erro ao deletar mapa' });
+  }
+});
+
+// Atualizar role do usuário
+app.put('/api/admin/users/:id/role', adminAuth, async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const { role } = req.body;
+    
+    if (!['user', 'tarologo', 'astrologo'].includes(role)) {
+      return res.status(400).json({ success: false, error: 'Role inválido' });
+    }
+    
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { role: role },
+      { new: true }
+    ).select('-senha');
+    
+    if (!user) {
+      return res.status(404).json({ success: false, error: 'Usuário não encontrado' });
+    }
+    
+    res.json({ success: true, message: 'Role atualizado com sucesso', user });
+  } catch (error) {
+    console.error('Erro ao atualizar role:', error);
+    res.status(500).json({ success: false, error: 'Erro ao atualizar role' });
   }
 });
 
@@ -551,6 +701,13 @@ app.delete('/api/astrologia/mapa/:id', auth, async (req, res) => {
     console.error('Erro ao deletar mapa:', error);
     res.status(500).json({ success: false, error: 'Erro ao deletar mapa.' });
   }
+});
+
+// ==================== ROTAS ESTÁTICAS ====================
+
+// Rota para área admin
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
 // ==================== INICIAR SERVIDOR ====================

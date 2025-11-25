@@ -40,9 +40,14 @@
                 <h2 id="nomeUsuario" data-i18n="dashboard.header.hello">Olá, Usuário!</h2>
                 <p id="emailUsuario"></p>
             </div>
-            <button id="btnLogout" class="btn-modern btn-logout" data-i18n="dashboard.header.btnLogout">
-                Sair
-            </button>
+            <div class="header-actions">
+                <a href="/admin" id="btnAdmin" class="btn-modern btn-admin" style="display: none; margin-right: 10px;">
+                    ⚙️ Admin
+                </a>
+                <button id="btnLogout" class="btn-modern btn-logout" data-i18n="dashboard.header.btnLogout">
+                    Sair
+                </button>
+            </div>
         </div>
 
         <!-- ==========================================
@@ -256,6 +261,7 @@
     <!-- ============================================
          JAVASCRIPT - Lógica do Dashboard
          ============================================ -->
+    <script src="cosmic-effects.js"></script>
     <script src="mapa-astral-image.js"></script>
     <script src="dashboard.js"></script>
     <script>

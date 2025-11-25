@@ -52,6 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
         btnLogout.addEventListener('click', logout);
     }
     
+    // Verificar se deve mostrar botão admin
+    verificarStatusAdmin();
+    
     console.log('✅ Dashboard inicializado');
     
     // Escutar mudanças de idioma para re-traduzir conteúdo dinâmico
@@ -659,6 +662,12 @@ async function carregarDadosUsuario() {
                 perfilEmail.value = data.usuario.email;
             }
             
+            // Mostrar botão admin se for administrador
+            const btnAdmin = document.getElementById('btnAdmin');
+            if (btnAdmin && data.usuario.isAdmin) {
+                btnAdmin.style.display = 'inline-block';
+            }
+            
             console.log('✅ Dados do usuário carregados:', data.usuario);
         } else {
             console.warn('⚠️ Erro ao carregar dados do usuário');
@@ -992,6 +1001,27 @@ function traduzirMensagemPlaneta(nomePlaneta) {
     
     const lang = window.i18n?.currentLang || 'pt';
     return traducoes[nomePlaneta]?.[lang] || 'Influência planetária';
+}
+
+async function verificarStatusAdmin() {
+    try {
+        const response = await fetch('/api/auth/me', {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success && data.usuario.isAdmin) {
+            const btnAdmin = document.getElementById('btnAdmin');
+            if (btnAdmin) {
+                btnAdmin.style.display = 'inline-block';
+            }
+        }
+    } catch (error) {
+        console.log('Não foi possível verificar status de admin');
+    }
 }
 
 // Tornar funções acessíveis globalmente

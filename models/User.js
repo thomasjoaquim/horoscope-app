@@ -39,6 +39,15 @@ const userSchema = new mongoose.Schema({
   criadoEm: {
     type: Date,
     default: Date.now
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false
+  },
+  role: {
+    type: String,
+    enum: ['user', 'tarologo', 'astrologo'],
+    default: 'user'
   }
 });
 

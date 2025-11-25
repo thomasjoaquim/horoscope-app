@@ -1,43 +1,109 @@
 /* ============================================
-   📊 DASHBOARD - Estilos Específicos
+   🌌 COSMIC DASHBOARD - Estilos Específicos
    ============================================ */
 
 /* Header do Dashboard */
 .dashboard-header {
-    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
-    color: white;
+    background: var(--card-gradient);
+    backdrop-filter: blur(20px);
+    color: var(--color-text-primary);
     padding: 30px;
-    border-radius: 15px;
+    border-radius: 20px;
     margin-bottom: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-glow);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(238, 218, 165, 0.1), transparent);
+    animation: shimmer 3s infinite;
 }
 
 .user-info h2 {
     margin-bottom: 5px;
+    font-family: var(--font-family-cosmic);
     font-size: 28px;
-    color: #ffffff !important;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    color: var(--starlight-gold) !important;
+    text-shadow: 0 0 15px rgba(238, 218, 165, 0.5);
     font-weight: bold;
     letter-spacing: 0.5px;
+    position: relative;
+    z-index: 2;
 }
 
 .user-info p {
     opacity: 1;
     font-size: 16px;
-    color: #e2e8f0 !important;
+    color: var(--color-text-secondary) !important;
     text-shadow: 0 1px 4px rgba(0,0,0,0.4);
     font-weight: 500;
+    position: relative;
+    z-index: 2;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.btn-admin {
+    background: linear-gradient(135deg, var(--cosmic-violet) 0%, var(--nebula-purple) 100%);
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(138, 94, 255, 0.4);
+    cursor: pointer;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(138, 94, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-admin::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-admin:hover::before {
+    left: 100%;
+}
+
+.btn-admin:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(138, 94, 255, 0.5);
+    text-decoration: none;
+    color: white;
+    border-color: var(--starlight-gold);
 }
 
 /* Botão de Logout */
 .btn-logout {
     background: rgba(255, 255, 255, 0.15);
-    color: #ffffff;
-    border: 2px solid #e2e8f0;
+    color: var(--color-text-primary);
+    border: 2px solid var(--border-color);
     padding: 10px 20px;
     border-radius: var(--border-radius-sm);
     cursor: pointer;
@@ -48,41 +114,69 @@
 }
 
 .btn-logout:hover {
-    background: #ffffff;
-    color: #0ea5e9;
+    background: var(--starlight-gold);
+    color: var(--cosmic-dark);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(238, 218, 165, 0.4);
 }
 
-/* Sistema de Tabs */
-.dashboard-tabs {
+/* Sistema de Tabs Cósmico */
+.modern-tabs {
     display: flex;
-    gap: 10px;
-    margin-bottom: 30px;
-    border-bottom: 2px solid var(--border-color);
-    overflow-x: auto;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-xl);
+    background: var(--card-gradient);
+    padding: var(--spacing-xs);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-glow);
 }
 
-.tab-btn {
-    padding: 15px 25px;
-    background: none;
-    border: none;
-    border-bottom: 3px solid transparent;
-    cursor: pointer;
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-semibold);
+.modern-tab {
+    flex: 1;
+    padding: 12px 20px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
     color: var(--color-text-secondary);
+    cursor: pointer;
     transition: all var(--transition-base);
-    white-space: nowrap;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
-.tab-btn.active {
-    color: var(--color-primary);
-    border-bottom-color: var(--color-primary);
+.modern-tab::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(138, 94, 255, 0.2), transparent);
+    transition: left 0.5s;
 }
 
-.tab-btn:hover {
-    color: var(--color-primary);
+.modern-tab:hover::before {
+    left: 100%;
+}
+
+.modern-tab:hover {
+    background: rgba(138, 94, 255, 0.1);
+    color: var(--starlight-gold);
+    border-color: var(--border-color);
+    text-shadow: 0 0 8px rgba(238, 218, 165, 0.4);
+}
+
+.modern-tab.active {
+    background: linear-gradient(135deg, var(--cosmic-violet) 0%, var(--nebula-purple) 100%);
+    color: white;
+    box-shadow: var(--shadow-glow);
+    border-color: var(--starlight-gold);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 /* Conteúdo das Tabs */
@@ -92,13 +186,26 @@
 
 .tab-content.active {
     display: block;
-    animation: fadeIn var(--transition-base);
+    animation: cosmicFadeIn 0.6s ease;
+}
+
+@keyframes cosmicFadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px) scale(0.98); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
 }
 
 .tab-content h2 {
-    color: var(--color-primary);
+    font-family: var(--font-family-cosmic);
+    color: var(--starlight-gold);
     margin-bottom: var(--spacing-lg);
     font-size: var(--font-size-2xl);
+    text-shadow: 0 0 15px rgba(238, 218, 165, 0.5);
 }
 
 /* Grid de Mapas */
@@ -109,32 +216,58 @@
     margin-top: 20px;
 }
 
-/* Card de Mapa */
+/* Card de Mapa Cósmico */
 .mapa-card {
-    background: var(--color-bg-card);
+    background: var(--card-gradient);
     border: 2px solid var(--border-color);
     border-radius: var(--border-radius-lg);
     padding: 20px;
     transition: all var(--transition-base);
     cursor: pointer;
+    backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-glow);
+    position: relative;
+    overflow: hidden;
+}
+
+.mapa-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(138, 94, 255, 0.05) 0%, rgba(238, 218, 165, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mapa-card:hover::before {
+    opacity: 1;
 }
 
 .mapa-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(14, 165, 233, 0.2);
-    border-color: var(--color-primary);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: var(--shadow-glow), 0 15px 40px rgba(0, 0, 0, 0.3);
+    border-color: var(--starlight-gold);
 }
 
 .mapa-card h3 {
-    color: var(--color-primary);
+    font-family: var(--font-family-cosmic);
+    color: var(--starlight-gold);
     margin-bottom: 10px;
     font-size: var(--font-size-xl);
+    text-shadow: 0 0 10px rgba(238, 218, 165, 0.5);
+    position: relative;
+    z-index: 2;
 }
 
 .mapa-card p {
     color: var(--color-text-secondary);
     margin: 5px 0;
     font-size: var(--font-size-sm);
+    position: relative;
+    z-index: 2;
 }
 
 .mapa-card p strong {
@@ -142,11 +275,11 @@
     font-weight: var(--font-weight-semibold);
 }
 
-/* Botão Delete */
+/* Botão Delete Cósmico */
 .btn-delete {
-    background: var(--color-error);
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
     color: white;
-    border: none;
+    border: 1px solid rgba(255, 107, 107, 0.4);
     padding: 8px 15px;
     border-radius: var(--border-radius-sm);
     cursor: pointer;
@@ -154,14 +287,32 @@
     font-weight: var(--font-weight-semibold);
     transition: all var(--transition-base);
     font-size: var(--font-size-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-delete::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-delete:hover::before {
+    left: 100%;
 }
 
 .btn-delete:hover {
-    background: #dc2626;
+    background: linear-gradient(135deg, #ff5252 0%, #d32f2f 100%);
     transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
 }
 
-/* Empty State */
+/* Empty State Cósmico */
 .empty-state {
     text-align: center;
     padding: 60px 20px;
@@ -169,20 +320,23 @@
 }
 
 .empty-state h3 {
+    font-family: var(--font-family-cosmic);
     font-size: var(--font-size-2xl);
     margin-bottom: 10px;
-    color: var(--color-text-secondary);
+    color: var(--starlight-gold);
+    text-shadow: 0 0 10px rgba(238, 218, 165, 0.5);
 }
 
 .empty-state p {
     font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
 }
 
-/* Botão Novo Mapa */
+/* Botão Novo Mapa Cósmico */
 .btn-novo-mapa {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    background: linear-gradient(135deg, var(--cosmic-violet) 0%, var(--nebula-purple) 100%);
     color: white;
-    border: none;
+    border: 1px solid var(--border-color);
     padding: 15px 30px;
     border-radius: var(--border-radius-md);
     font-size: var(--font-size-lg);
@@ -190,11 +344,12 @@
     cursor: pointer;
     margin-top: 20px;
     transition: all var(--transition-base);
+    box-shadow: var(--shadow-glow);
 }
 
 .btn-novo-mapa:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-glow);
+    box-shadow: var(--shadow-glow), var(--starlight-shadow);
 }
 
 /* Responsivo */
@@ -205,11 +360,21 @@
         text-align: center;
     }
 
-    .dashboard-tabs {
+    .header-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-admin {
+        width: 100%;
+        text-align: center;
+    }
+
+    .modern-tabs {
         flex-wrap: wrap;
     }
 
-    .tab-btn {
+    .modern-tab {
         flex: 1;
         min-width: 100px;
     }
@@ -218,10 +383,8 @@
         grid-template-columns: 1fr;
     }
 }
-/* ============================================
-   BOTÕES DE IMAGEM
-   ============================================ */
 
+/* Botões de Imagem Cósmicos */
 .image-actions {
     display: flex;
     gap: 10px;
@@ -238,32 +401,51 @@
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s;
-    border: none;
+    border: 1px solid var(--border-color);
     display: flex;
     align-items: center;
     gap: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-download-image::before,
+.btn-share-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-download-image:hover::before,
+.btn-share-image:hover::before {
+    left: 100%;
 }
 
 .btn-download-image {
-    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+    background: linear-gradient(135deg, var(--cosmic-violet) 0%, var(--nebula-purple) 100%);
     color: white;
-    box-shadow: 0 5px 15px rgba(14, 165, 233, 0.3);
+    box-shadow: var(--shadow-glow);
 }
 
 .btn-download-image:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(14, 165, 233, 0.5);
+    box-shadow: var(--shadow-glow), 0 10px 25px rgba(138, 94, 255, 0.5);
 }
 
 .btn-share-image {
-    background: white;
-    color: #0ea5e9;
-    border: 2px solid #0ea5e9;
+    background: var(--card-gradient);
+    color: var(--starlight-gold);
+    border: 2px solid var(--starlight-gold);
 }
 
 .btn-share-image:hover {
-    background: #0ea5e9;
-    color: white;
+    background: var(--starlight-gold);
+    color: var(--cosmic-dark);
     transform: translateY(-2px);
 }
 
@@ -276,12 +458,15 @@
     max-width: 100%;
     height: auto;
     border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    box-shadow: var(--shadow-glow), 0 10px 40px rgba(0,0,0,0.3);
     margin-top: 15px;
+    border: 1px solid var(--border-color);
 }
 
 .image-preview h3 {
-    color: #0ea5e9;
+    font-family: var(--font-family-cosmic);
+    color: var(--starlight-gold);
     margin-bottom: 10px;
     font-size: 24px;
+    text-shadow: 0 0 15px rgba(238, 218, 165, 0.5);
 }

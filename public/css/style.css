@@ -21,28 +21,28 @@
 
 :root {
   /* 🎨 CORES PRINCIPAIS */
-  --color-primary: #667eea;        /* Roxo principal */
-  --color-primary-dark: #764ba2;   /* Roxo escuro */
-  --color-secondary: #f093fb;      /* Rosa secundário */
-  --color-accent: #4facfe;         /* Azul de destaque */
+  --color-primary: #0ea5e9;        /* Azul moderno */
+  --color-primary-dark: #0284c7;   /* Azul escuro */
+  --color-secondary: #10b981;      /* Verde esmeralda */
+  --color-accent: #f59e0b;         /* Dourado */
   
   /* 🎨 CORES DE FUNDO */
-  --color-bg-body: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --color-bg-body: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
   --color-bg-card: #ffffff;
-  --color-bg-section: #f8f9fa;
+  --color-bg-section: #f1f5f9;
   --color-bg-input: #ffffff;
   
   /* 🎨 CORES DE TEXTO */
-  --color-text-primary: #333333;
-  --color-text-secondary: #666666;
-  --color-text-light: #999999;
+  --color-text-primary: #1e293b;
+  --color-text-secondary: #475569;
+  --color-text-light: #64748b;
   --color-text-white: #ffffff;
   
   /* 🎨 CORES DE STATUS */
-  --color-success: #4caf50;
-  --color-error: #ff6b6b;
-  --color-warning: #ffc107;
-  --color-info: #2196f3;
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #0ea5e9;
   
   /* 📝 TIPOGRAFIA */
   --font-family-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -87,7 +87,7 @@
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
   --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
   --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
-  --shadow-glow: 0 0 20px rgba(102, 126, 234, 0.4);
+  --shadow-glow: 0 0 20px rgba(14, 165, 233, 0.4);
   
   /* ⏱️ TRANSIÇÕES */
   --transition-fast: 0.15s ease;

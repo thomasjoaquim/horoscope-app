@@ -181,6 +181,36 @@
       "10": "Outubro",
       "11": "Novembro",
       "12": "Dezembro"
+    },
+    "choice": {
+      "title": "✨ Escolha Sua Jornada Cósmica ✨",
+      "subtitle": "Descubra os mistérios do universo através de duas experiências únicas",
+      "welcome": "Bem-vindo de volta",
+      "logout": "Sair",
+      "confirmLogout": "Deseja realmente sair?",
+      "astral": {
+        "title": "🌙 Mapa Astral",
+        "description": "Descubra os segredos das estrelas no momento do seu nascimento. Um mapa completo da sua personalidade cósmica.",
+        "feature1": "• Sol, Lua e Ascendente",
+        "feature2": "• Posição dos Planetas",
+        "feature3": "• Análise Personalizada",
+        "button": "🔮 Descobrir Mapa"
+      },
+      "tarot": {
+        "title": "🔮 Cartas de Tarot",
+        "description": "Deixe as cartas guiarem seu caminho. Responda perguntas íntimas e revele mensagens místicas do universo.",
+        "feature1": "• Quiz Personalizado",
+        "feature2": "• 3 Cartas Reveladas",
+        "feature3": "• Mensagens Profundas",
+        "button": "✨ Consultar Tarot"
+      }
+    },
+    "tarot": {
+      "progress": "Pergunta",
+      "back": "Voltar",
+      "next": "Próxima",
+      "newReading": "Nova Leitura",
+      "backHome": "Voltar ao Início"
     }
   },
   "en": {
@@ -365,6 +395,36 @@
       "10": "October",
       "11": "November",
       "12": "December"
+    },
+    "choice": {
+      "title": "✨ Choose Your Cosmic Journey ✨",
+      "subtitle": "Discover the mysteries of the universe through two unique experiences",
+      "welcome": "Welcome back",
+      "logout": "Logout",
+      "confirmLogout": "Do you really want to logout?",
+      "astral": {
+        "title": "🌙 Birth Chart",
+        "description": "Discover the secrets of the stars at the moment of your birth. A complete map of your cosmic personality.",
+        "feature1": "• Sun, Moon and Ascendant",
+        "feature2": "• Planetary Positions",
+        "feature3": "• Personalized Analysis",
+        "button": "🔮 Discover Chart"
+      },
+      "tarot": {
+        "title": "🔮 Tarot Cards",
+        "description": "Let the cards guide your path. Answer intimate questions and reveal mystical messages from the universe.",
+        "feature1": "• Personalized Quiz",
+        "feature2": "• 3 Cards Revealed",
+        "feature3": "• Deep Messages",
+        "button": "✨ Consult Tarot"
+      }
+    },
+    "tarot": {
+      "progress": "Question",
+      "back": "Back",
+      "next": "Next",
+      "newReading": "New Reading",
+      "backHome": "Back to Home"
     }
   }
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suas Cartas Reveladas - Portal Astrológico</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tarot-results.css">
+    <script src="i18n.js"></script>
+</head>
+<body>
+    <div class="results-container">
+        <!-- Header -->
+        <div class="results-header">
+            <h1 id="resultsTitle">Suas Cartas Foram Reveladas</h1>
+            <p id="resultsSubtitle">O cosmos ouviu suas palavras e revelou estas mensagens especialmente para você</p>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="cards-grid" id="cardsGrid">
+            <!-- Cards will be dynamically inserted here -->
+        </div>
+
+        <!-- Personal Message -->
+        <div class="personal-message" id="personalMessage" style="display: none;">
+            <p id="personalText"></p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="results-navigation">
+            <button onclick="newReading()" class="nav-btn secondary-btn">
+                ← <span data-i18n="tarot.newReading">Nova Leitura</span>
+            </button>
+            <button onclick="goHome()" class="nav-btn primary-btn">
+                <span data-i18n="tarot.backHome">Voltar ao Início</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="tarot-results.js"></script>
+</body>
+</html>

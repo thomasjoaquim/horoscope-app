@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Tarot - Portal Astrológico</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tarot.css">
+    <script src="i18n.js"></script>
+</head>
+<body>
+    <!-- Seletor de Idioma -->
+    <div class="language-selector">
+        <button onclick="window.i18n.changeLanguage('pt')" class="lang-btn" data-lang="pt">
+            🇧🇷 PT
+        </button>
+        <button onclick="window.i18n.changeLanguage('en')" class="lang-btn" data-lang="en">
+            🇺🇸 EN
+        </button>
+    </div>
+
+    <div class="tarot-container">
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-info">
+                <span id="questionCounter" data-i18n="tarot.progress">Pergunta 1 de 8</span>
+                <span id="progressPercent">12%</span>
+            </div>
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+        </div>
+
+        <!-- Question Card -->
+        <div class="question-card">
+            <div class="card-decoration">✨</div>
+            
+            <h2 id="questionText" class="question-text">
+                Primeiro, me diga... qual é o seu nome?
+            </h2>
+
+            <!-- Personal Input (for first 3 questions) -->
+            <div id="personalInput" class="personal-input">
+                <label id="inputLabel" class="input-label">
+                    Digite seu nome para que as cartas possam conhecê-lo melhor
+                </label>
+                <input 
+                    type="text" 
+                    id="personalField" 
+                    class="personal-field"
+                    placeholder="Seu nome completo"
+                    autofocus
+                >
+            </div>
+
+            <!-- Choice Options (for other questions) -->
+            <div id="choiceOptions" class="choice-options" style="display: none;">
+                <!-- Options will be dynamically inserted here -->
+            </div>
+
+            <!-- Navigation -->
+            <div class="navigation">
+                <button id="backBtn" class="nav-btn back-btn" onclick="goBack()">
+                    ← <span data-i18n="tarot.back">Voltar</span>
+                </button>
+                <button id="nextBtn" class="nav-btn next-btn" onclick="goNext()" disabled>
+                    <span data-i18n="tarot.next">Próxima</span> →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="tarot-quiz.js"></script>
+    <script>
+        // Marcar idioma ativo
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const currentLang = window.i18n?.currentLang || 'pt';
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.lang === currentLang) {
+                        btn.classList.add('active');
+                    }
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

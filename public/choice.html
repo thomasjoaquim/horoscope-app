@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha sua Jornada - Portal Astrológico</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/choice.css">
+    <script src="i18n.js"></script>
+</head>
+<body>
+    <!-- Seletor de Idioma -->
+    <div class="language-selector">
+        <button onclick="window.i18n.changeLanguage('pt')" class="lang-btn" data-lang="pt">
+            🇧🇷 PT
+        </button>
+        <button onclick="window.i18n.changeLanguage('en')" class="lang-btn" data-lang="en">
+            🇺🇸 EN
+        </button>
+    </div>
+
+    <div class="choice-container">
+        <!-- Header -->
+        <div class="choice-header">
+            <h1 data-i18n="choice.title">✨ Escolha Sua Jornada Cósmica ✨</h1>
+            <p data-i18n="choice.subtitle">Descubra os mistérios do universo através de duas experiências únicas</p>
+        </div>
+
+        <!-- Choice Cards -->
+        <div class="choice-grid">
+            <!-- Mapa Astral Card -->
+            <div class="choice-card astral-card" onclick="goToAstral()">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="card-icon">
+                        <div class="icon-circle astral-icon">
+                            ⭐
+                        </div>
+                    </div>
+                    <h2 data-i18n="choice.astral.title">🌙 Mapa Astral</h2>
+                    <p data-i18n="choice.astral.description">
+                        Descubra os segredos das estrelas no momento do seu nascimento. 
+                        Um mapa completo da sua personalidade cósmica.
+                    </p>
+                    <div class="card-features">
+                        <span data-i18n="choice.astral.feature1">• Sol, Lua e Ascendente</span>
+                        <span data-i18n="choice.astral.feature2">• Posição dos Planetas</span>
+                        <span data-i18n="choice.astral.feature3">• Análise Personalizada</span>
+                    </div>
+                    <button class="choice-btn astral-btn" data-i18n="choice.astral.button">
+                        🔮 Descobrir Mapa
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tarot Card -->
+            <div class="choice-card tarot-card" onclick="goToTarot()">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="card-icon">
+                        <div class="icon-circle tarot-icon">
+                            🃏
+                        </div>
+                    </div>
+                    <h2 data-i18n="choice.tarot.title">🔮 Cartas de Tarot</h2>
+                    <p data-i18n="choice.tarot.description">
+                        Deixe as cartas guiarem seu caminho. Responda perguntas íntimas 
+                        e revele mensagens místicas do universo.
+                    </p>
+                    <div class="card-features">
+                        <span data-i18n="choice.tarot.feature1">• Quiz Personalizado</span>
+                        <span data-i18n="choice.tarot.feature2">• 3 Cartas Reveladas</span>
+                        <span data-i18n="choice.tarot.feature3">• Mensagens Profundas</span>
+                    </div>
+                    <button class="choice-btn tarot-btn" data-i18n="choice.tarot.button">
+                        ✨ Consultar Tarot
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Info -->
+        <div class="user-info">
+            <p id="welcomeMessage" data-i18n="choice.welcome">Bem-vindo de volta!</p>
+            <button onclick="logout()" class="logout-btn" data-i18n="choice.logout">Sair</button>
+        </div>
+    </div>
+
+    <script>
+        // Verificar autenticação
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Carregar dados do usuário
+            loadUserData();
+            
+            // Marcar idioma ativo
+            setTimeout(() => {
+                const currentLang = window.i18n?.currentLang || 'pt';
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.lang === currentLang) {
+                        btn.classList.add('active');
+                    }
+                });
+            }, 100);
+        });
+
+        async function loadUserData() {
+            try {
+                const response = await fetch('/api/auth/me', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (data.success && data.usuario) {
+                    const welcomeMsg = document.getElementById('welcomeMessage');
+                    const helloText = window.i18n?.t('choice.welcome') || 'Bem-vindo de volta';
+                    welcomeMsg.textContent = `${helloText}, ${data.usuario.nome}!`;
+                }
+            } catch (error) {
+                console.error('Erro ao carregar dados do usuário:', error);
+            }
+        }
+
+        function goToAstral() {
+            window.location.href = 'dashboard.html';
+        }
+
+        function goToTarot() {
+            window.location.href = 'tarot-quiz.html';
+        }
+
+        function logout() {
+            if (confirm(window.i18n?.t('choice.confirmLogout') || 'Deseja realmente sair?')) {
+                localStorage.removeItem('token');
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>
